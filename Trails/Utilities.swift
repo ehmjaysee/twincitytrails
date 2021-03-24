@@ -401,21 +401,3 @@ extension TimeInterval
     }
 }
 
-import CoreLocation
-
-extension CLLocationCoordinate2D {
-    var displayString: String {
-        return String(latitude) + "," + String(longitude)
-    }
-}
-
-
-extension UIBarButtonItem
-{
-    func hide() {
-        tintColor = UIColor.clear
-    }
-//    func unhide() {
-//        tintColor = MItintColor
-//    }
-}

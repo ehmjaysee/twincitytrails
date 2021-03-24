@@ -13,6 +13,8 @@ import UserNotifications
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate
 {
+    var window: UIWindow?   // required by UIApplicationDelegate
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
         // Assign this class as the delegate for User Notifications

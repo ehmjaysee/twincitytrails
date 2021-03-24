@@ -24,16 +24,13 @@ class TrailDetailVC: UIViewController
     
     
     
-    var index: Int!     // set by presetner VC
-    var trail: TrailData!
+    var trail: TrailData!  // set by presetner VC
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
         NotificationCenter.default.addObserver(self, selector: #selector(trailUpdate(notification:)), name: Notif_TrailUpdate, object: nil)
-
-        trail = allTrails[index]
 
         navigationItem.title = trail.name
 
@@ -58,7 +55,7 @@ class TrailDetailVC: UIViewController
                 O_map.selectAnnotation(annotation, animated: true)
             }
             let locations = [user, trail.trailhead]
-            centerMap(locations)
+            O_map.centerMap( locations )
             O_map.isUserInteractionEnabled = false
         }
 
@@ -144,7 +141,6 @@ class TrailDetailVC: UIViewController
         }
     }
     
-    
     @objc func trailUpdate( notification: NSNotification ) {
         if let id = notification.object as? String, id == trail.id, let newData = allTrails.first(where: { $0.id == id }) {
             // There was an update to the trail data that we are currently displaying
@@ -159,47 +155,7 @@ class TrailDetailVC: UIViewController
         }
     }
 
-    private func centerMap(_ locations: [CLLocation])
-    {
-        var topLeftCoord = CLLocationCoordinate2D(latitude: -90, longitude: 180)
-        var bottomRightCoord = CLLocationCoordinate2D(latitude: 90, longitude: -180)
-        
-        for annotation in locations {
-            topLeftCoord.latitude = max(topLeftCoord.latitude, annotation.coordinate.latitude)
-            topLeftCoord.longitude = min(topLeftCoord.longitude, annotation.coordinate.longitude)
-            bottomRightCoord.latitude = min(bottomRightCoord.latitude, annotation.coordinate.latitude)
-            bottomRightCoord.longitude = max(bottomRightCoord.longitude, annotation.coordinate.longitude)
-        }
-        let newCenter = CLLocationCoordinate2D(
-            latitude: topLeftCoord.latitude - (topLeftCoord.latitude - bottomRightCoord.latitude) / 2,
-            longitude: topLeftCoord.longitude - (topLeftCoord.longitude - bottomRightCoord.longitude) / 2)
-        let extraSpace = 1.4
-        let span = MKCoordinateSpan(
-            latitudeDelta: abs(topLeftCoord.latitude - bottomRightCoord.latitude) * extraSpace,
-            longitudeDelta: abs(topLeftCoord.longitude - bottomRightCoord.longitude) * extraSpace)
-        
-        let newRegion = MKCoordinateRegion(center: newCenter, span: span)
-        
-        O_map.setCenter(newCenter, animated: false)
-        O_map.setRegion(newRegion, animated: false)
-        
-    }
-}
-
-
-class PinObject: NSObject, MKAnnotation
-{
-    @objc dynamic var coordinate: CLLocationCoordinate2D
-    var title: String?
-    @objc dynamic var subtitle: String?
-
-    init?( trail: TrailData )
-    {
-        coordinate = trail.trailhead.coordinate
-        title = trail.name
-        subtitle = "Trailhead"
-    }
-}
+} // class TrailDetailVC
 
 
 extension TrailDetailVC: MKMapViewDelegate
@@ -213,10 +169,6 @@ extension TrailDetailVC: MKMapViewDelegate
                 return annotationView
             } else {
                 let annotationView = MKPinAnnotationView(annotation:annotation, reuseIdentifier:identifier)
-
-//                let btn = UIButton(type: .detailDisclosure)
-//                btn.setTitle("Directions", for: .normal)
-//                annotationView.rightCalloutAccessoryView = btn
                 annotationView.canShowCallout = true
                 annotationView.isEnabled = true
                 return annotationView
@@ -225,15 +177,4 @@ extension TrailDetailVC: MKMapViewDelegate
 
         return nil
     }
-/*
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        let capital = view.annotation as! PinObject
-        let placeName = capital.title
-        let placeInfo = "testing"   //capital.info
-
-        let ac = UIAlertController(title: placeName, message: placeInfo, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
-    }
-*/
 }

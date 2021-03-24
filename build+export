@@ -5,6 +5,6 @@ fi
 
 arch=~/Library/Developer/Xcode/Archives/automated/$1-$2.xcarchive
 
-xcodebuild archive -workspace Trails-411.xcworkspace/ -scheme $1 -archivePath $arch
+xcodebuild archive -workspace Trails.xcworkspace/ -scheme $1 -archivePath $arch
 xcodebuild -exportArchive -archivePath $arch -exportOptionsPlist export.plist
 

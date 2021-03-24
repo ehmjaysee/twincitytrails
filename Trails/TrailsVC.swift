@@ -31,9 +31,12 @@ class TrailsVC: UIViewController
         refreshControl.addTarget(self, action: #selector(updateStatus), for: UIControl.Event.valueChanged)
         O_table.refreshControl = refreshControl
 
-        O_controls.hide()
+        if locationManager.lastLockedLocation == nil {
+            O_controls.hide()
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(trailUpdate(notification:)), name: Notif_TrailUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(locationUpdate(notification:)), name: Notif_LocationUpdate, object: nil)
         
         MORCdata.update()       // get the latest trail status
     }
@@ -41,7 +44,7 @@ class TrailsVC: UIViewController
     @IBAction func A_notification(_ sender: Any)
     {
         if ckManager.ckStatus != .available {
-            let msg = "\nWould you like to be notified when your favorite trails are open oor cloosed?\n\nThis feature requires iCloud. Please log into your iCloud account and try again."
+            let msg = "\nWould you like to be notified when your favorite trails are open or cloosed?\n\nThis feature requires iCloud. Please log into your iCloud account and try again."
             doAlert(vc: self, title: "Alert", message: msg, fontSize: 17.0)
             return
         }
@@ -109,19 +112,23 @@ class TrailsVC: UIViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? TrailDetailVC, let row = O_table.indexPathForSelectedRow {
             O_table.deselectRow(at: row, animated: false)
-            vc.index = row.row
+            vc.trail = allTrails[row.row]
         }
     }
     
     @objc private func updateStatus() { MORCdata.update() }
     
-    @objc func trailUpdate( notification: NSNotification ) {
+    @objc private func trailUpdate( notification: NSNotification ) {
         if let id = notification.object as? String {
             // a specific trail was updated
         } else {
             // the list of trails was updated
             DispatchQueue.main.async { self.refresh() }
         }
+    }
+    
+    @objc private func locationUpdate( notification: NSNotification ) {
+        O_controls.unhide()
     }
     
     private func refresh()

@@ -50,7 +50,84 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="115.94202898550725" y="99.776785714285708"/>
+            <point key="canvasLocation" x="229" y="100"/>
+        </scene>
+        <!--MapVC-->
+        <scene sceneID="phc-CQ-ZVQ">
+            <objects>
+                <viewController id="8K1-lf-CM2" customClass="MapVC" customModule="Trails" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qT6-y4-9fE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lZS-em-TuG" customClass="MKMapView">
+                                <rect key="frame" x="0.0" y="88" width="414" height="724"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="delegate" destination="8K1-lf-CM2" id="ZLL-Yk-BTW"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MEL-RJ-IHY">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="4" translatesAutoresizingMaskIntoConstraints="NO" id="iz7-L2-XBZ">
+                                        <rect key="frame" x="56" y="9.5" width="302" height="32"/>
+                                        <segments>
+                                            <segment title="10mi"/>
+                                            <segment title="20mi"/>
+                                            <segment title="40mi"/>
+                                            <segment title="80mi"/>
+                                            <segment title="Any Distance"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="A_distance:" destination="8K1-lf-CM2" eventType="valueChanged" id="KK7-MW-gEu"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="COJ-gU-79c"/>
+                                    <constraint firstItem="iz7-L2-XBZ" firstAttribute="centerX" secondItem="MEL-RJ-IHY" secondAttribute="centerX" id="Ra4-N2-UhQ"/>
+                                    <constraint firstItem="iz7-L2-XBZ" firstAttribute="centerY" secondItem="MEL-RJ-IHY" secondAttribute="centerY" id="kUs-Xx-VJp"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="duy-Vk-Pir"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="duy-Vk-Pir" firstAttribute="trailing" secondItem="MEL-RJ-IHY" secondAttribute="trailing" id="F4E-3I-4wV"/>
+                            <constraint firstItem="lZS-em-TuG" firstAttribute="leading" secondItem="duy-Vk-Pir" secondAttribute="leading" id="Gf9-36-0Dj"/>
+                            <constraint firstItem="duy-Vk-Pir" firstAttribute="trailing" secondItem="lZS-em-TuG" secondAttribute="trailing" id="NS1-eP-qYj"/>
+                            <constraint firstItem="MEL-RJ-IHY" firstAttribute="top" secondItem="lZS-em-TuG" secondAttribute="bottom" id="ObG-dx-sel"/>
+                            <constraint firstItem="lZS-em-TuG" firstAttribute="top" secondItem="duy-Vk-Pir" secondAttribute="top" id="WaB-ib-X4h"/>
+                            <constraint firstItem="duy-Vk-Pir" firstAttribute="bottom" secondItem="MEL-RJ-IHY" secondAttribute="bottom" id="bLo-3K-dIr"/>
+                            <constraint firstItem="MEL-RJ-IHY" firstAttribute="leading" secondItem="duy-Vk-Pir" secondAttribute="leading" id="jK0-1I-IX7"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="cSN-0v-Lpf">
+                        <nil key="title"/>
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="tcO-EY-zmf">
+                            <rect key="frame" x="122.5" y="5.5" width="169" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="All Trails"/>
+                                <segment title="Open Only"/>
+                            </segments>
+                            <connections>
+                                <action selector="A_filter:" destination="8K1-lf-CM2" eventType="valueChanged" id="NzI-AK-dLi"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="O_bottomView" destination="MEL-RJ-IHY" id="Lj5-aH-eTF"/>
+                        <outlet property="O_distance" destination="iz7-L2-XBZ" id="8Ju-n5-VJC"/>
+                        <outlet property="O_filter" destination="tcO-EY-zmf" id="g6i-2t-RvT"/>
+                        <outlet property="O_map" destination="lZS-em-TuG" id="VVJ-le-bfU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fDU-9C-p58" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2480" y="100"/>
         </scene>
         <!--TrailsVC-->
         <scene sceneID="V2W-b5-9Uj">
@@ -165,9 +242,10 @@
                                 <action selector="A_filter:" destination="k3c-td-Yhz" eventType="valueChanged" id="cNi-Q2-kKd"/>
                             </connections>
                         </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="controls" id="Cru-tk-at9">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="map" catalog="system" id="Cru-tk-at9">
                             <connections>
                                 <action selector="A_controls:" destination="k3c-td-Yhz" id="SrF-PJ-OmV"/>
+                                <segue destination="8K1-lf-CM2" kind="show" id="2Tq-hS-6sC"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -240,12 +318,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vfH-IL-mcn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1716" y="775"/>
+            <point key="canvasLocation" x="986" y="100"/>
         </scene>
         <!--Trail DetailVC-->
         <scene sceneID="Nod-cu-Kxq">
             <objects>
-                <viewController id="QJt-HX-EuF" customClass="TrailDetailVC" customModule="Trails" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TrailDetailVC" id="QJt-HX-EuF" customClass="TrailDetailVC" customModule="Trails" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="csd-5e-l8G">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -365,7 +443,9 @@
                             <constraint firstItem="nmc-gg-FZJ" firstAttribute="trailing" secondItem="KPF-j7-R23" secondAttribute="trailing" id="Y97-fg-OBQ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="HcG-RT-Vy5"/>
+                    <navigationItem key="navigationItem" id="HcG-RT-Vy5">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="tcx-3Y-1Zt"/>
+                    </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="O_directions" destination="HdE-Au-1kr" id="rdH-fg-ePz"/>
@@ -380,7 +460,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="273-fA-PgS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2576.811594202899" y="99.776785714285708"/>
+            <point key="canvasLocation" x="1716" y="801"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Lyi-mV-ask">
@@ -398,7 +478,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKV-dS-5EO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="868" y="100"/>
+            <point key="canvasLocation" x="1716" y="-613"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nau-dd-PrP">
@@ -420,7 +500,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zrs-Ah-CQd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="867" y="776"/>
+            <point key="canvasLocation" x="986" y="-613"/>
         </scene>
         <!--Photo Browser-->
         <scene sceneID="tXa-9S-5DM">
@@ -445,17 +525,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Photo Browser" id="nRB-Jd-gpX">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="Oen-5d-CjZ"/>
                         <barButtonItem key="rightBarButtonItem" title="Upload" id="0aR-Sj-rc9"/>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SoH-oN-eyJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4075" y="100"/>
+            <point key="canvasLocation" x="3261" y="801"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BjX-jh-nsB">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mRh-mG-Cx9" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="PhotoNav" automaticallyAdjustsScrollViewInsets="NO" id="mRh-mG-Cx9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VzB-nG-Vvc">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -468,14 +549,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WgZ-vA-Szs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3300" y="100"/>
+            <point key="canvasLocation" x="2480" y="801"/>
         </scene>
     </scenes>
     <resources>
         <image name="back" width="59" height="33"/>
         <image name="bell.fill" catalog="system" width="128" height="124"/>
-        <image name="chevron.right" catalog="system" width="96" height="128"/>
-        <image name="controls" width="64" height="64"/>
+        <image name="chevron.right" catalog="system" width="32" height="32"/>
+        <image name="map" catalog="system" width="128" height="110"/>
         <image name="splash-7" width="720" height="960"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

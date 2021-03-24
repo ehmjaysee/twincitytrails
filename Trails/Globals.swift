@@ -18,3 +18,5 @@ struct Defaults {
 
 // Notifications
 let Notif_TrailUpdate               = Notification.Name("TrailUpdate")        
+
+
