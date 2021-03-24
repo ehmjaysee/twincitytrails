@@ -1,3 +1,7 @@
+# xcrun agvtool what-version
+# xcrun agvtool next-version
+
+
 if [ "$#" -ne 2 ]; then
     echo "Usage: build+export <scheme> <version>"
     exit

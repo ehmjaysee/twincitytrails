@@ -41,11 +41,10 @@ extension CLLocationCoordinate2D {
 extension UIBarButtonItem
 {
     func hide() {
+        
         tintColor = UIColor.clear
     }
     func unhide() {
-        if let color = UIApplication.shared.delegate?.window??.tintColor {
-            tintColor = color
-        }
+        tintColor = nil // use system default color
     }
 }
