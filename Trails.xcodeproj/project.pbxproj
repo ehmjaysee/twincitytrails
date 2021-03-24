@@ -431,7 +431,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Trails/Trails.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 6ZKDZES4M7;
 				INFOPLIST_FILE = "$(SRCROOT)/Trails/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -441,7 +441,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ehmjaysee.twincitytrails;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -453,7 +453,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Trails/Trails.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 6ZKDZES4M7;
 				INFOPLIST_FILE = "$(SRCROOT)/Trails/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -463,7 +463,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ehmjaysee.twincitytrails;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
