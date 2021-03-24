@@ -13,5 +13,6 @@ March 24
 - Renamed app to Twin City Trails
 - Added Map view
 - Detail view shows trail name, status, last update message, default photo, map, directions, trail map, and links to Trail Forks or MTB Project
+- Notifications working
 
 

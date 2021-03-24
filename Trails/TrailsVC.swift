@@ -119,7 +119,7 @@ class TrailsVC: UIViewController
     @objc private func updateStatus() { MORCdata.update() }
     
     @objc private func trailUpdate( notification: NSNotification ) {
-        if let id = notification.object as? String {
+        if let _ = notification.object as? String {
             // a specific trail was updated
         } else {
             // the list of trails was updated

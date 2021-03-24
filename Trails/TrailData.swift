@@ -135,7 +135,7 @@ var allTrails: [TrailData] = [
               TrailForks:  "skillpark/cottage-grove-bike-park/",
               MORC: "trail/7000927/cottage-grove-bike-park",
               filename: "cottage-grove" ),
-    TrailData(name: "Elm Creek", id: "d932e5fc-a4a4-4e33-820d-864556d0c0ec", lat: 45.068901, lon: -93.755282,
+    TrailData(name: "Elm Creek", id: "d932e5fc-a4a4-4e33-820d-864556d0c0ec", lat: 45.180928, lon: -93.415879,
               TrailForks: "region/elm-creek-park/",
               MORC: "trail/4403021/elm-creek-10-mile-ride",
               filename: "elm-creek" ),

@@ -54,8 +54,7 @@ class TrailDetailVC: UIViewController
                 O_map.addAnnotation(annotation)
                 O_map.selectAnnotation(annotation, animated: true)
             }
-            let locations = [user, trail.trailhead]
-            O_map.centerMap( locations )
+            O_map.fitAll(userLocation: user, animated: false)
             O_map.isUserInteractionEnabled = false
         }
 

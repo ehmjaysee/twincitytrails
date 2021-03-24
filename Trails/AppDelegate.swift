@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
         */
-        let container = NSPersistentContainer(name: "Trails_411")
+        let container = NSPersistentContainer(name: "Trails")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
@@ -118,7 +118,7 @@ extension AppDelegate
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void)
     {
-        NSLog(#function + " \(userInfo)")
+        print(#function + " \(userInfo)")
         
         // Parse the userInfo dictionary and extract all the data fields we expect to receive for a CloudKit subscription notification
         if let ckNotification = CKNotification(fromRemoteNotificationDictionary: userInfo)! as? CKQueryNotification,

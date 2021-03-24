@@ -24,9 +24,21 @@ class MapVC: UIViewController
     {
         super.viewDidLoad()
 
+        NotificationCenter.default.addObserver(self, selector: #selector(trailUpdate(notification:)), name: Notif_TrailUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(locationUpdate(notification:)), name: Notif_LocationUpdate, object: nil)
+
         // Update the map
         O_map.showsUserLocation = true
-        refresh()
+        
+        // Create annotations for all trails
+        allTrails.forEach { trail in
+            if let annotation = PinObject(trail: trail) {
+                O_map.addAnnotation(annotation)
+            }
+        }
+        if let user = locationManager.lastLockedLocation {
+            O_map.fitAll(userLocation: user, animated: false)
+        }
     }
     
     @IBAction func A_filter(_ sender: Any) { refresh() }
@@ -36,18 +48,30 @@ class MapVC: UIViewController
     {
         getFilteredTrails()
         
+        // Remove stale annotations
+        O_map.annotations.forEach { annotation in
+            if let pin = annotation as? PinObject, filteredTrails.contains(where: { $0.id == pin.id }) == false {
+                O_map.removeAnnotation(annotation)
+            }
+        }
+        
+        // Add the missing annotations
         filteredTrails.forEach { trail in
-            if let annotation = PinObject(trail: trail) {
+            var matching: MKAnnotation?
+            for item in O_map.annotations {
+                if let pin = item as? PinObject, pin.id == trail.id {
+                    matching = item
+                    break
+                }
+            }
+            if matching == nil, let annotation = PinObject(trail: trail) {
                 O_map.addAnnotation(annotation)
             }
         }
 
-        var locations = [CLLocation]()
-        if let user = locationManager.lastLockedLocation {
-            locations.append(user)
+        if let user = locationManager.lastLockedLocation, filteredTrails.count > 0 {
+            O_map.fitAll(userLocation: user, animated: true)
         }
-        locations += filteredTrails.map { $0.trailhead }
-        O_map.centerMap( locations )
     }
     
     private func getFilteredTrails()
@@ -72,6 +96,27 @@ class MapVC: UIViewController
         }
         
         filteredTrails.sort { $0.name < $1.name }
+    }
+    
+    @objc private func trailUpdate( notification: NSNotification )
+    {
+        if let id = notification.object as? String, let trail = allTrails.first(where: { $0.id == id }), let meters = trail.distance {
+            // One specific trail was updated. Update the annotation details
+            for item in O_map.annotations {
+                if let pin = item as? PinObject, pin.id == id {
+                    pin.subtitle = PinObject.getSubtitle(meters: meters)
+                }
+            }
+        } else {
+            // the list of trails was updated
+            DispatchQueue.main.async { self.refresh() }
+        }
+    }
+    
+    @objc private func locationUpdate( notification: NSNotification ) {
+        if let user = locationManager.lastLockedLocation {
+            O_map.fitAll(userLocation: user, animated: true)
+        }
     }
 
 }
@@ -120,11 +165,16 @@ class PinObject: NSObject, MKAnnotation
     {
         title = trail.name
         if let meters = trail.distance {
-            let miles = meters / MetersPerMile
-            subtitle = String(format:"%.1f miles", miles)
+            subtitle = PinObject.getSubtitle(meters: meters)
         }
         coordinate = trail.trailhead.coordinate
         id = trail.id
+    }
+    
+    class func getSubtitle( meters: Double ) -> String
+    {
+        let miles = meters / MetersPerMile
+        return String(format:"%.1f miles", miles)
     }
 }
 

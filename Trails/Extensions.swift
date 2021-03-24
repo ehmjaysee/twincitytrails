@@ -9,33 +9,26 @@ import Foundation
 import MapKit
 
 
-extension MKMapView {
-    func centerMap(_ locations: [CLLocation])
+extension MKMapView
+{
+    // Center & Size the map to show all annotations
+    func fitAll( userLocation: CLLocation? = nil, animated: Bool )
     {
-        var topLeftCoord = CLLocationCoordinate2D(latitude: -90, longitude: 180)
-        var bottomRightCoord = CLLocationCoordinate2D(latitude: 90, longitude: -180)
-        
-        for annotation in locations {
-            topLeftCoord.latitude = max(topLeftCoord.latitude, annotation.coordinate.latitude)
-            topLeftCoord.longitude = min(topLeftCoord.longitude, annotation.coordinate.longitude)
-            bottomRightCoord.latitude = min(bottomRightCoord.latitude, annotation.coordinate.latitude)
-            bottomRightCoord.longitude = max(bottomRightCoord.longitude, annotation.coordinate.longitude)
+        var zoomRect            = MKMapRect.null
+        for annotation in annotations {
+            let annotationPoint = MKMapPoint(annotation.coordinate)
+            let pointRect       = MKMapRect(x: annotationPoint.x, y: annotationPoint.y, width: 0.01, height: 0.01);
+            zoomRect            = zoomRect.union(pointRect);
         }
-        let newCenter = CLLocationCoordinate2D(
-            latitude: topLeftCoord.latitude - (topLeftCoord.latitude - bottomRightCoord.latitude) / 2,
-            longitude: topLeftCoord.longitude - (topLeftCoord.longitude - bottomRightCoord.longitude) / 2)
-        let extraSpace = 1.4
-        let span = MKCoordinateSpan(
-            latitudeDelta: abs(topLeftCoord.latitude - bottomRightCoord.latitude) * extraSpace,
-            longitudeDelta: abs(topLeftCoord.longitude - bottomRightCoord.longitude) * extraSpace)
-        
-        let newRegion = MKCoordinateRegion(center: newCenter, span: span)
-        
-        self.setCenter(newCenter, animated: false)
-        self.setRegion(newRegion, animated: false)
+        if let user = userLocation {
+            let annotationPoint = MKMapPoint(user.coordinate)
+            let pointRect       = MKMapRect(x: annotationPoint.x, y: annotationPoint.y, width: 0.01, height: 0.01);
+            zoomRect            = zoomRect.union(pointRect);
+        }
+        setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100), animated: animated)
     }
+} // extension MKMapView
 
-}
 
 import CoreLocation
 
@@ -44,7 +37,6 @@ extension CLLocationCoordinate2D {
         return String(latitude) + "," + String(longitude)
     }
 }
-
 
 extension UIBarButtonItem
 {
