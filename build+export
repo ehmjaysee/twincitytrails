@@ -1,0 +1,10 @@
+if [ "$#" -ne 2 ]; then
+    echo "Usage: build+export <scheme> <version>"
+    exit
+fi
+
+arch=~/Library/Developer/Xcode/Archives/automated/$1-$2.xcarchive
+
+xcodebuild archive -workspace Trails-411.xcworkspace/ -scheme $1 -archivePath $arch
+xcodebuild -exportArchive -archivePath $arch -exportOptionsPlist export.plist
+
