@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '13.0'
 
 target 'Trails' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -9,7 +9,6 @@ target 'Trails' do
   pod 'Alamofire'
   pod 'ReachabilitySwift'
   pod 'SwiftyJSON'
-#  pod 'TORoundedButton'
-  pod 'TORoundedButton', :path => '~/github/RoundedButton'
+  pod 'TORoundedButton', :path => '~/xcode/devpods/TORoundedButton'
   
 end
