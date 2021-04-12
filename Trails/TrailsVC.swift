@@ -62,7 +62,7 @@ class TrailsVC: UIViewController
                 // We never requested permission from the user.
                 // Ask the user if they want notifications or not.
                 DispatchQueue.main.async {
-                    let msg = "Would you like to be notified when your favoriite trails are open or closed? "
+                    let msg = "Would you like to be notified when your favorite trails are open or closed? "
                     let alert = UIAlertController(title: msg, message: "", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
                     alert.addAction(UIAlertAction(title: "Yes", style: .default) {_ in
