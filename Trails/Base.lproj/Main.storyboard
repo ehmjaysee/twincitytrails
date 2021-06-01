@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -117,10 +118,17 @@
                                 <action selector="A_filter:" destination="8K1-lf-CM2" eventType="valueChanged" id="NzI-AK-dLi"/>
                             </connections>
                         </segmentedControl>
+                        <barButtonItem key="rightBarButtonItem" id="2k0-3R-u6Q">
+                            <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
+                            <connections>
+                                <action selector="A_favorite:" destination="8K1-lf-CM2" id="EDy-kP-5EB"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="O_bottomView" destination="MEL-RJ-IHY" id="Lj5-aH-eTF"/>
                         <outlet property="O_distance" destination="iz7-L2-XBZ" id="8Ju-n5-VJC"/>
+                        <outlet property="O_favorite" destination="2k0-3R-u6Q" id="Oo6-RD-RgV"/>
                         <outlet property="O_filter" destination="tcO-EY-zmf" id="g6i-2t-RvT"/>
                         <outlet property="O_map" destination="lZS-em-TuG" id="VVJ-le-bfU"/>
                     </connections>
@@ -166,7 +174,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TrailCell" rowHeight="60" id="wV9-CY-byP" customClass="TrailCell" customModule="Trails" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wV9-CY-byP" id="t3X-5L-w5l">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -242,18 +250,26 @@
                                 <action selector="A_filter:" destination="k3c-td-Yhz" eventType="valueChanged" id="cNi-Q2-kKd"/>
                             </connections>
                         </segmentedControl>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="map" catalog="system" id="Cru-tk-at9">
-                            <connections>
-                                <action selector="A_controls:" destination="k3c-td-Yhz" id="SrF-PJ-OmV"/>
-                                <segue destination="8K1-lf-CM2" kind="show" id="2Tq-hS-6sC"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem image="map" catalog="system" id="Cru-tk-at9">
+                                <connections>
+                                    <action selector="A_controls:" destination="k3c-td-Yhz" id="SrF-PJ-OmV"/>
+                                    <segue destination="8K1-lf-CM2" kind="show" id="2Tq-hS-6sC"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="heart" catalog="system" id="vKS-Af-Srl">
+                                <connections>
+                                    <action selector="A_favorite:" destination="k3c-td-Yhz" id="x2h-pc-bTn"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="O_bottomHeight" destination="Hqf-fD-L8j" id="Gye-G1-EtD"/>
                         <outlet property="O_bottomView" destination="11c-6C-f8f" id="7Mu-8m-wlj"/>
                         <outlet property="O_controls" destination="Cru-tk-at9" id="7ZZ-ru-g2m"/>
                         <outlet property="O_distance" destination="wsT-9Y-mCH" id="OPg-Xa-rIa"/>
+                        <outlet property="O_favorite" destination="vKS-Af-Srl" id="eq4-5K-6X7"/>
                         <outlet property="O_filter" destination="ofd-Wz-SIN" id="afs-fx-Q4A"/>
                         <outlet property="O_table" destination="aGp-HO-3W4" id="VOw-1Z-k1G"/>
                     </connections>
@@ -272,7 +288,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NotifyCell" textLabel="h9E-u8-Mld" style="IBUITableViewCellStyleDefault" id="8Sx-6x-FGy">
-                                <rect key="frame" x="0.0" y="55.5" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="49.5" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8Sx-6x-FGy" id="i2s-L9-rds">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -313,8 +329,16 @@
                                 <action selector="A_back:" destination="aKJ-Ww-OYR" id="kBX-5a-N7o"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="heart" catalog="system" id="1zj-5d-SH8">
+                            <connections>
+                                <action selector="A_favorite:" destination="aKJ-Ww-OYR" id="AYN-RZ-N7C"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="O_favorite" destination="1zj-5d-SH8" id="bz1-8D-0CZ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vfH-IL-mcn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -393,8 +417,21 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Hc4-rr-o7Y">
-                                                <rect key="frame" x="145.5" y="348" width="123" height="28"/>
+                                                <rect key="frame" x="146.5" y="348" width="121.5" height="28"/>
                                             </pageControl>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IMh-Be-1Sh">
+                                                <rect key="frame" x="364" y="20" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="8xM-hE-wEE"/>
+                                                    <constraint firstAttribute="width" constant="30" id="AaB-X2-IVj"/>
+                                                </constraints>
+                                                <state key="normal">
+                                                    <imageReference key="image" image="heart" catalog="system" symbolScale="large"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="A_favorite:" destination="QJt-HX-EuF" eventType="touchUpInside" id="i6F-NX-AfZ"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.14837869971689555" green="0.14837869971689555" blue="0.14837869971689555" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -405,8 +442,10 @@
                                             <constraint firstItem="Rvu-dP-QNX" firstAttribute="top" secondItem="f1L-XP-Zhz" secondAttribute="bottom" constant="-4" id="AQ0-yf-5wu"/>
                                             <constraint firstAttribute="trailing" secondItem="w2a-q2-SyU" secondAttribute="trailing" constant="30" id="GEd-bE-9cp"/>
                                             <constraint firstItem="HdE-Au-1kr" firstAttribute="top" secondItem="Hc4-rr-o7Y" secondAttribute="bottom" constant="30" id="HiQ-ms-WX2"/>
+                                            <constraint firstAttribute="trailing" secondItem="IMh-Be-1Sh" secondAttribute="trailing" constant="20" id="IYt-M8-SZU"/>
                                             <constraint firstItem="HdE-Au-1kr" firstAttribute="centerX" secondItem="1o7-hs-8Me" secondAttribute="centerX" id="Kzm-a7-Fv9"/>
                                             <constraint firstAttribute="trailing" secondItem="34k-Gi-UuW" secondAttribute="trailing" id="LMZ-BM-nX2"/>
+                                            <constraint firstItem="IMh-Be-1Sh" firstAttribute="top" secondItem="1o7-hs-8Me" secondAttribute="top" constant="20" id="M1M-Oc-gJE"/>
                                             <constraint firstItem="w2a-q2-SyU" firstAttribute="leading" secondItem="1o7-hs-8Me" secondAttribute="leading" constant="30" id="NRE-oA-piJ"/>
                                             <constraint firstItem="f1L-XP-Zhz" firstAttribute="leading" secondItem="1o7-hs-8Me" secondAttribute="leading" constant="20" id="Oex-eU-PZT"/>
                                             <constraint firstAttribute="trailing" secondItem="KeZ-RL-Xyx" secondAttribute="trailing" id="TBA-Qc-PnV"/>
@@ -450,6 +489,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="O_directions" destination="HdE-Au-1kr" id="rdH-fg-ePz"/>
+                        <outlet property="O_favorite" destination="IMh-Be-1Sh" id="C4W-I1-27M"/>
                         <outlet property="O_image" destination="w2a-q2-SyU" id="z5E-gM-yTV"/>
                         <outlet property="O_imagePageControl" destination="Hc4-rr-o7Y" id="R8I-2F-BDv"/>
                         <outlet property="O_map" destination="34k-Gi-UuW" id="oAX-N0-PqL"/>
@@ -557,6 +597,7 @@
         <image name="back" width="59" height="33"/>
         <image name="bell.fill" catalog="system" width="128" height="124"/>
         <image name="chevron.right" catalog="system" width="96" height="128"/>
+        <image name="heart" catalog="system" width="128" height="109"/>
         <image name="map" catalog="system" width="128" height="110"/>
         <image name="splash-7" width="720" height="960"/>
         <systemColor name="systemBackgroundColor">

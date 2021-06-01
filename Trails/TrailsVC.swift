@@ -16,10 +16,10 @@ class TrailsVC: UIViewController
     @IBOutlet weak var O_table: UITableView!
     @IBOutlet weak var O_filter: UISegmentedControl!
     @IBOutlet weak var O_distance: UISegmentedControl!
+    @IBOutlet weak var O_favorite: UIBarButtonItem!
     
     var filteredTrails = [TrailData]()
 
-    
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -39,6 +39,8 @@ class TrailsVC: UIViewController
         NotificationCenter.default.addObserver(self, selector: #selector(locationUpdate(notification:)), name: Notif_LocationUpdate, object: nil)
         
         MORCdata.update()       // get the latest trail status
+        
+        setFavoriteImage()
     }
     
     @IBAction func A_notification(_ sender: Any)
@@ -109,6 +111,12 @@ class TrailsVC: UIViewController
         refresh()
     }
     
+    @IBAction func A_favorite(_ sender: Any) {
+        showFavoriteOnly = !showFavoriteOnly
+        setFavoriteImage()
+        refresh()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? TrailDetailVC, let row = O_table.indexPathForSelectedRow {
             O_table.deselectRow(at: row, animated: false)
@@ -129,6 +137,15 @@ class TrailsVC: UIViewController
     
     @objc private func locationUpdate( notification: NSNotification ) {
         O_controls.unhide()
+    }
+    
+    private func setFavoriteImage()
+    {
+        if showFavoriteOnly {
+            O_favorite.image = UIImage(systemName: "heart.fill")
+        } else {
+            O_favorite.image = UIImage(systemName: "heart")
+        }
     }
     
     private func refresh()
@@ -157,9 +174,11 @@ class TrailsVC: UIViewController
         for trail in allTrails {
             if onlyOpen && (trail.isOpen == false) { continue }
             if let trailDist = trail.distance, trailDist > distance { continue }
-            filteredTrails.append(trail)
+            if showFavoriteOnly == false || trail.isFavorite {
+                filteredTrails.append(trail)
+            }
         }
-        
+
         filteredTrails.sort { $0.name < $1.name }
     }
     

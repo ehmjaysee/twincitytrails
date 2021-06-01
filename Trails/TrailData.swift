@@ -41,7 +41,7 @@ class TrailData
         }
     }
     var isSubscribed: Bool { return (subscriptionId != nil )}
-    var editSubscription = false
+    var subscriptionRequested = false
     var isOpen: Bool {
         if let status = status, status.caseInsensitiveCompare("open") == .orderedSame {
             return true
@@ -65,12 +65,22 @@ class TrailData
             return " "
         }
     }
+    
+    private var favoriteKey: String {
+        let key = id + "favorite"
+        return key
+    }
+    var isFavorite: Bool {
+        get { return appDefaults.bool(forKey: favoriteKey) }
+        set { appDefaults.setValue(newValue, forKey: favoriteKey) }
+    }
 
     init( name: String, id: String, lat: Double, lon: Double ) {
         self.id = id
         self.name = name
         self.trailhead = CLLocation(latitude: lat, longitude: lon)
         self.estimateTravelDistanceToRider()
+        self.subscriptionRequested = isSubscribed
         NotificationCenter.default.addObserver(self, selector: #selector(locationUpdate(notification:)), name: Notif_LocationUpdate, object: nil)
     }
     
@@ -82,6 +92,7 @@ class TrailData
         self.TrailForksPage = TrailForks
         self.MORCpage = MORC
         self.filename = filename
+        self.subscriptionRequested = isSubscribed
         NotificationCenter.default.addObserver(self, selector: #selector(locationUpdate(notification:)), name: Notif_LocationUpdate, object: nil)
     }
     

@@ -16,6 +16,7 @@ class MapVC: UIViewController
     @IBOutlet weak var O_map: MKMapView!
     @IBOutlet weak var O_bottomView: UIView!
     @IBOutlet weak var O_distance: UISegmentedControl!
+    @IBOutlet weak var O_favorite: UIBarButtonItem!
     
     
     var filteredTrails = [TrailData]()
@@ -31,18 +32,25 @@ class MapVC: UIViewController
         O_map.showsUserLocation = true
         
         // Create annotations for all trails
-        allTrails.forEach { trail in
-            if let annotation = PinObject(trail: trail) {
-                O_map.addAnnotation(annotation)
-            }
-        }
-        if let user = locationManager.lastLockedLocation {
-            O_map.fitAll(userLocation: user, animated: false)
-        }
+        refresh()
     }
     
     @IBAction func A_filter(_ sender: Any) { refresh() }
     @IBAction func A_distance(_ sender: Any) { refresh() }
+    
+    @IBAction func A_favorite(_ sender: Any) {
+        showFavoriteOnly = !showFavoriteOnly
+        refresh()
+    }
+    
+    private func setFavoriteImage()
+    {
+        if showFavoriteOnly {
+            O_favorite.image = UIImage(systemName: "heart.fill")
+        } else {
+            O_favorite.image = UIImage(systemName: "heart")
+        }
+    }
     
     private func refresh()
     {
@@ -91,6 +99,7 @@ class MapVC: UIViewController
         
         for trail in allTrails {
             if onlyOpen && (trail.isOpen == false) { continue }
+            if showFavoriteOnly && (trail.isFavorite == false) { continue }
             if let trailDist = trail.distance, trailDist > distance { continue }
             filteredTrails.append(trail)
         }
@@ -127,7 +136,7 @@ extension MapVC: MKMapViewDelegate
     {
         let identifier = "Trailhead"
 
-        if annotation is PinObject {
+        if let pin = annotation as? PinObject, let index = allTrails.firstIndex(where: { $0.id == pin.id }) {
             if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) {
                 annotationView.annotation = annotation
                 return annotationView
@@ -135,7 +144,7 @@ extension MapVC: MKMapViewDelegate
                 let annotationView = MKPinAnnotationView(annotation:annotation, reuseIdentifier:identifier)
                 annotationView.isEnabled = true
                 annotationView.canShowCallout = true
-
+                annotationView.pinTintColor = (allTrails[index].isOpen) ? .systemGreen : .systemRed
                 let btn = UIButton(type: .detailDisclosure)
                 annotationView.rightCalloutAccessoryView = btn
                 return annotationView

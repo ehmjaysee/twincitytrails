@@ -107,9 +107,9 @@ class CKmanager
     func updateSubscriptions()
     {
         for item in allTrails {
-            if (item.editSubscription == true) && (item.isSubscribed == false) {
+            if (item.subscriptionRequested == true) && (item.isSubscribed == false) {
                 createSubscription( trail: item )    // create new subscription
-            } else if item.isSubscribed && (item.editSubscription == false) {
+            } else if item.isSubscribed && (item.subscriptionRequested == false) {
                 // delete subscription
                 deleteSubscription( trail: item )
             }

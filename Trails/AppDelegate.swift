@@ -163,7 +163,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate
         print(#function)
         DispatchQueue.main.async {
             // navigate to the main UI
-            //debug
         }
         completionHandler()
     }

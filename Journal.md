@@ -15,4 +15,7 @@ March 24
 - Detail view shows trail name, status, last update message, default photo, map, directions, trail map, and links to Trail Forks or MTB Project
 - Notifications working
 
+June 1
+- Add favorites to all view controllers
+- Map pins are colored to indicate open/close status
 

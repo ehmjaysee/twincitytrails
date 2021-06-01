@@ -21,6 +21,7 @@ class TrailDetailVC: UIViewController
     @IBOutlet weak var O_updated: UIButton!
     @IBOutlet weak var O_trailMaps: RoundedButton!
     @IBOutlet weak var O_imagePageControl: UIPageControl!
+    @IBOutlet weak var O_favorite: UIButton!
     
     
     
@@ -77,11 +78,27 @@ class TrailDetailVC: UIViewController
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
             O_trailMap.addGestureRecognizer(tapGestureRecognizer)
         }
+
+        setFavoriteImage()
     }
 
     @IBAction func A_updated(_ sender: Any) {
         let message = "\n" + (trail.description ?? "There are no notes for this trail")
         doAlert(vc: self, title: "Latest Update", message: message, fontSize: 17.0)
+    }
+    
+    @IBAction func A_favorite(_ sender: Any) {
+        trail.isFavorite = !trail.isFavorite
+        setFavoriteImage()
+    }
+    
+    private func setFavoriteImage()
+    {
+        if trail.isFavorite {
+            O_favorite.setImage(UIImage(systemName: "heart.fill") , for: .normal)
+        } else {
+            O_favorite.setImage(UIImage(systemName: "heart") , for: .normal)
+        }
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {

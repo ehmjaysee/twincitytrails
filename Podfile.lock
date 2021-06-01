@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.4.1)
+  - Alamofire (5.4.3)
   - ReachabilitySwift (5.0.0)
   - SwiftyJSON (5.0.1)
   - TORoundedButton (1.1.3)
@@ -21,11 +21,11 @@ EXTERNAL SOURCES:
     :path: "~/xcode/devpods/TORoundedButton"
 
 SPEC CHECKSUMS:
-  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
   TORoundedButton: 96001eec63bb1705e38aa6e3eae415024f544309
 
-PODFILE CHECKSUM: c768507456d1e73b07ed1e3ab7e9e46b041a2978
+PODFILE CHECKSUM: fe936d8d36ef32d31736fcc113750c1c8a738ad6
 
 COCOAPODS: 1.10.1

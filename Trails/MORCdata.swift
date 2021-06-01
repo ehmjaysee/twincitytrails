@@ -31,6 +31,7 @@ class MORCdataProvider
                 return
             }
             guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                print("HTTP " + String(describing: response))
                 self.busy = false
                 return
             }
@@ -45,11 +46,11 @@ class MORCdataProvider
     private func parse( response: JSON )
     {
         for trail in response.arrayValue {
-//            print("\n")
-//            print(trail)
             
             guard let name = trail["trailName"].string, let id = trail["trailId"].string, let status = trail["trailStatus"].string, let date = trail["updatedAt"].int64 else { continue }
 
+            print(name + " " + status)
+            
             let list = allTrails.filter { $0.id == id }
             print(name + " \(list.count)")
             
