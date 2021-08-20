@@ -99,6 +99,8 @@ class TrailData
     private func estimateTravelDistanceToRider()
     {
         guard let myLocation = locationManager.lastLockedLocation else { return }
+
+        incrementETAcounter()
         
         // Get the travel time estimate from Apple MapKit
         //todo: Use MapBox for better estimates
@@ -117,8 +119,9 @@ class TrailData
                 print("ETA \(response.expectedTravelTime)s \(response.distance)m")
                 self.travelTime = response.expectedTravelTime
                 self.distance = response.distance
-                NotificationCenter.default.post(name: Notif_TrailUpdate, object: self.id)
+//debug                NotificationCenter.default.post(name: Notif_TrailUpdate, object: self.id)
             }
+            decrementETAcounter()
         }
     }
 
@@ -126,6 +129,27 @@ class TrailData
     {
         // We get this notification when our location is determined for first time -AND- when it changes significantly
         self.estimateTravelDistanceToRider()
+    }
+    
+}
+
+private var ETAcounter = 0
+
+private func incrementETAcounter() {
+    DispatchQueue.main.async {
+        ETAcounter += 1
+        print(ETAcounter)
+    }
+}
+
+private func decrementETAcounter() {
+    DispatchQueue.main.async {
+        ETAcounter -= 1
+        print(ETAcounter)
+        if ETAcounter <= 0 {
+            ETAcounter = 0
+            NotificationCenter.default.post(name: Notif_TrailUpdate, object: nil)   // force table refresh
+        }
     }
 }
 

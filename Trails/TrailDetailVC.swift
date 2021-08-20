@@ -180,13 +180,15 @@ extension TrailDetailVC: MKMapViewDelegate
         let identifier = "PinObject"
 
         if annotation is PinObject {
-            if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) {
+            if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView {
                 annotationView.annotation = annotation
+                annotationView.pinTintColor = trail.isOpen ? .systemGreen : .systemRed
                 return annotationView
             } else {
                 let annotationView = MKPinAnnotationView(annotation:annotation, reuseIdentifier:identifier)
                 annotationView.canShowCallout = true
                 annotationView.isEnabled = true
+                annotationView.pinTintColor = trail.isOpen ? .systemGreen : .systemRed
                 return annotationView
             }
         }

@@ -253,7 +253,6 @@
                         <rightBarButtonItems>
                             <barButtonItem image="map" catalog="system" id="Cru-tk-at9">
                                 <connections>
-                                    <action selector="A_controls:" destination="k3c-td-Yhz" id="SrF-PJ-OmV"/>
                                     <segue destination="8K1-lf-CM2" kind="show" id="2Tq-hS-6sC"/>
                                 </connections>
                             </barButtonItem>
@@ -267,10 +266,10 @@
                     <connections>
                         <outlet property="O_bottomHeight" destination="Hqf-fD-L8j" id="Gye-G1-EtD"/>
                         <outlet property="O_bottomView" destination="11c-6C-f8f" id="7Mu-8m-wlj"/>
-                        <outlet property="O_controls" destination="Cru-tk-at9" id="7ZZ-ru-g2m"/>
                         <outlet property="O_distance" destination="wsT-9Y-mCH" id="OPg-Xa-rIa"/>
                         <outlet property="O_favorite" destination="vKS-Af-Srl" id="eq4-5K-6X7"/>
                         <outlet property="O_filter" destination="ofd-Wz-SIN" id="afs-fx-Q4A"/>
+                        <outlet property="O_map" destination="Cru-tk-at9" id="D1h-oZ-4q2"/>
                         <outlet property="O_table" destination="aGp-HO-3W4" id="VOw-1Z-k1G"/>
                     </connections>
                 </viewController>

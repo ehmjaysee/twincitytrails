@@ -11,7 +11,7 @@ class TrailsVC: UIViewController
 {
 
     @IBOutlet weak var O_bottomView: UIView!
-    @IBOutlet weak var O_controls: UIBarButtonItem!
+    @IBOutlet weak var O_map: UIBarButtonItem!
     @IBOutlet weak var O_bottomHeight: NSLayoutConstraint!
     @IBOutlet weak var O_table: UITableView!
     @IBOutlet weak var O_filter: UISegmentedControl!
@@ -32,15 +32,19 @@ class TrailsVC: UIViewController
         O_table.refreshControl = refreshControl
 
         if locationManager.lastLockedLocation == nil {
-            O_controls.hide()
+            O_map.hide()
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(trailUpdate(notification:)), name: Notif_TrailUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(locationUpdate(notification:)), name: Notif_LocationUpdate, object: nil)
         
         MORCdata.update()       // get the latest trail status
-        
-        setFavoriteImage()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showUserSettings()
+        refresh()
     }
     
     @IBAction func A_notification(_ sender: Any)
@@ -92,35 +96,25 @@ class TrailsVC: UIViewController
         }
     }
 
-    @IBAction func A_controls(_ sender: Any)
-    {
-        let newHeight: CGFloat = (O_bottomHeight.constant == 1.0) ? 60.0 : 1.0
-                
-        UIView.animate(withDuration: 0.5) {
-            self.O_bottomHeight.constant = newHeight
-            self.view.layoutIfNeeded()
-        }
-
-    }
-    
     @IBAction func A_filter(_ sender: Any) {
         refresh()
     }
     
     @IBAction func A_distance(_ sender: Any) {
+        showDistance = O_distance.selectedSegmentIndex
         refresh()
     }
     
     @IBAction func A_favorite(_ sender: Any) {
         showFavoriteOnly = !showFavoriteOnly
-        setFavoriteImage()
+        showUserSettings()
         refresh()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? TrailDetailVC, let row = O_table.indexPathForSelectedRow {
             O_table.deselectRow(at: row, animated: false)
-            vc.trail = allTrails[row.row]
+            vc.trail = filteredTrails[row.row]
         }
     }
     
@@ -136,16 +130,17 @@ class TrailsVC: UIViewController
     }
     
     @objc private func locationUpdate( notification: NSNotification ) {
-        O_controls.unhide()
+        O_map.unhide()
     }
     
-    private func setFavoriteImage()
+    private func showUserSettings()
     {
         if showFavoriteOnly {
             O_favorite.image = UIImage(systemName: "heart.fill")
         } else {
             O_favorite.image = UIImage(systemName: "heart")
         }
+        O_distance.selectedSegmentIndex = showDistance
     }
     
     private func refresh()
@@ -161,16 +156,8 @@ class TrailsVC: UIViewController
         filteredTrails.removeAll()
         
         let onlyOpen = (O_filter.selectedSegmentIndex == 1)
-        let distance: Double
+        let distance = showDistanceMiles
 
-        switch O_distance.selectedSegmentIndex {
-        case 0: distance = 10.0 * MetersPerMile
-        case 1: distance = 20 * MetersPerMile
-        case 2: distance = 40 * MetersPerMile
-        case 3: distance = 80 * MetersPerMile
-        default: distance = 9999 * MetersPerMile
-        }
-        
         for trail in allTrails {
             if onlyOpen && (trail.isOpen == false) { continue }
             if let trailDist = trail.distance, trailDist > distance { continue }

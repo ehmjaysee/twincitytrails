@@ -45,7 +45,7 @@ class MORCdataProvider
     
     private func parse( response: JSON )
     {
-        for trail in response.arrayValue {
+        for (i,trail) in response.arrayValue.enumerated() {
             
             guard let name = trail["trailName"].string, let id = trail["trailId"].string, let status = trail["trailStatus"].string, let date = trail["updatedAt"].int64 else { continue }
 
@@ -59,7 +59,11 @@ class MORCdataProvider
             if let index = allTrails.firstIndex(where: { $0.id == id }) {
                 let seconds = (date / 1000)
                 let lastUpdate = Date(timeIntervalSince1970: TimeInterval(seconds))
-                allTrails[index].status = status
+                if testMode {
+                    allTrails[index].status = ((i % 2) == 0) ? "open":"closed"
+                } else {
+                    allTrails[index].status = status
+                }
                 allTrails[index].lastUpdate = lastUpdate
                 allTrails[index].description = trail["description"].string
             } else if let name = trail["trailName"].string, let date = trail["updatedAt"].int64,

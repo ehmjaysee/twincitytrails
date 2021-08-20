@@ -28,28 +28,35 @@ class MapVC: UIViewController
         NotificationCenter.default.addObserver(self, selector: #selector(trailUpdate(notification:)), name: Notif_TrailUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(locationUpdate(notification:)), name: Notif_LocationUpdate, object: nil)
 
+        showUserSettings()
+        
         // Update the map
         O_map.showsUserLocation = true
         
         // Create annotations for all trails
         refresh()
     }
-    
+
     @IBAction func A_filter(_ sender: Any) { refresh() }
-    @IBAction func A_distance(_ sender: Any) { refresh() }
-    
-    @IBAction func A_favorite(_ sender: Any) {
-        showFavoriteOnly = !showFavoriteOnly
+    @IBAction func A_distance(_ sender: Any) {
+        showDistance = O_distance.selectedSegmentIndex
         refresh()
     }
     
-    private func setFavoriteImage()
+    @IBAction func A_favorite(_ sender: Any) {
+        showFavoriteOnly = !showFavoriteOnly
+        showUserSettings()
+        refresh()
+    }
+
+    private func showUserSettings()
     {
         if showFavoriteOnly {
             O_favorite.image = UIImage(systemName: "heart.fill")
         } else {
             O_favorite.image = UIImage(systemName: "heart")
         }
+        O_distance.selectedSegmentIndex = showDistance
     }
     
     private func refresh()
@@ -87,16 +94,8 @@ class MapVC: UIViewController
         filteredTrails.removeAll()
         
         let onlyOpen = (O_filter.selectedSegmentIndex == 1)
-        let distance: Double
+        let distance = showDistanceMiles
 
-        switch O_distance.selectedSegmentIndex {
-        case 0: distance = 10.0 * MetersPerMile
-        case 1: distance = 20 * MetersPerMile
-        case 2: distance = 40 * MetersPerMile
-        case 3: distance = 80 * MetersPerMile
-        default: distance = 9999 * MetersPerMile
-        }
-        
         for trail in allTrails {
             if onlyOpen && (trail.isOpen == false) { continue }
             if showFavoriteOnly && (trail.isFavorite == false) { continue }
@@ -137,8 +136,9 @@ extension MapVC: MKMapViewDelegate
         let identifier = "Trailhead"
 
         if let pin = annotation as? PinObject, let index = allTrails.firstIndex(where: { $0.id == pin.id }) {
-            if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) {
+            if let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView {
                 annotationView.annotation = annotation
+                annotationView.pinTintColor = (allTrails[index].isOpen) ? .systemGreen : .systemRed
                 return annotationView
             } else {
                 let annotationView = MKPinAnnotationView(annotation:annotation, reuseIdentifier:identifier)
