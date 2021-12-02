@@ -30,6 +30,10 @@ class TrailData
         let key = id + "sub"
         return key
     }
+    private var subRequestedKey: String {
+        let key = id + "requested"
+        return key
+    }
     var subscriptionId: String? {
         get { return appDefaults.string(forKey: subKey) }
         set {
@@ -41,7 +45,10 @@ class TrailData
         }
     }
     var isSubscribed: Bool { return (subscriptionId != nil )}
-    var subscriptionRequested = false
+    var subscriptionRequested: Bool {
+        get { return appDefaults.bool(forKey: subRequestedKey) }
+        set { appDefaults.setValue( newValue, forKey: subRequestedKey) }
+    }
     var isOpen: Bool {
         if let status = status, status.caseInsensitiveCompare("open") == .orderedSame {
             return true
@@ -116,7 +123,7 @@ class TrailData
             if let error = error {
                 print("ETA \(error)")
             } else if let response = response {
-                print("ETA \(response.expectedTravelTime)s \(response.distance)m")
+//                print("ETA \(response.expectedTravelTime)s \(response.distance)m")
                 self.travelTime = response.expectedTravelTime
                 self.distance = response.distance
 //debug                NotificationCenter.default.post(name: Notif_TrailUpdate, object: self.id)
@@ -138,14 +145,14 @@ private var ETAcounter = 0
 private func incrementETAcounter() {
     DispatchQueue.main.async {
         ETAcounter += 1
-        print(ETAcounter)
+//        print(ETAcounter)
     }
 }
 
 private func decrementETAcounter() {
     DispatchQueue.main.async {
         ETAcounter -= 1
-        print(ETAcounter)
+//        print(ETAcounter)
         if ETAcounter <= 0 {
             ETAcounter = 0
             NotificationCenter.default.post(name: Notif_TrailUpdate, object: nil)   // force table refresh

@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 import UserNotifications
+import CloudKit
 
 
 @main
@@ -20,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate
         // Assign this class as the delegate for User Notifications
         UNUserNotificationCenter.current().delegate = self
 
+        // One-time user settings init
+        userSettingsInit()
+        
         // This app receives notifications from CloudKit when the DataLogger app updates records in the public database.
         // Register early to receive these notifications becuase the app may have been launched due to a notification
         // so we must be ready for it.
@@ -99,6 +103,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        }
+    }
+
+    private func userSettingsInit()
+    {
+        if appDefaults.object(forKey: Defaults.showDistance) == nil {
+            showDistance = 4  // default to ANY DISTANCE
         }
     }
 

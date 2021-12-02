@@ -23,6 +23,10 @@ struct Defaults {
 // Notifications
 let Notif_TrailUpdate               = Notification.Name("TrailUpdate")        
 
+var ckSubVersion: Int {
+    get { return appDefaults.integer(forKey: Defaults.ckSubVersion)}
+    set { appDefaults.setValue(newValue, forKey: Defaults.ckSubVersion)}
+}
 var showFavoriteOnly: Bool {
     get { return appDefaults.bool(forKey: Defaults.favoriteOnly)}
     set { appDefaults.setValue(newValue, forKey: Defaults.favoriteOnly)}

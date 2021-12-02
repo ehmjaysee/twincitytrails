@@ -19,3 +19,4 @@ June 1
 - Add favorites to all view controllers
 - Map pins are colored to indicate open/close status
 
+Nov 

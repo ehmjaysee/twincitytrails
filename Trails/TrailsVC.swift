@@ -6,17 +6,19 @@
 //
 
 import UIKit
+import TORoundedButton
+
 
 class TrailsVC: UIViewController
 {
 
     @IBOutlet weak var O_bottomView: UIView!
     @IBOutlet weak var O_map: UIBarButtonItem!
-    @IBOutlet weak var O_bottomHeight: NSLayoutConstraint!
     @IBOutlet weak var O_table: UITableView!
     @IBOutlet weak var O_filter: UISegmentedControl!
     @IBOutlet weak var O_distance: UISegmentedControl!
     @IBOutlet weak var O_favorite: UIBarButtonItem!
+    @IBOutlet weak var O_share: RoundedButton!
     
     var filteredTrails = [TrailData]()
 
@@ -35,10 +37,11 @@ class TrailsVC: UIViewController
             O_map.hide()
         }
         
+        // Update the directions button
+        O_share.tappedHandler = { self.shareApp() }
+        
         NotificationCenter.default.addObserver(self, selector: #selector(trailUpdate(notification:)), name: Notif_TrailUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(locationUpdate(notification:)), name: Notif_LocationUpdate, object: nil)
-        
-        MORCdata.update()       // get the latest trail status
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -169,7 +172,25 @@ class TrailsVC: UIViewController
         filteredTrails.sort { $0.name < $1.name }
     }
     
-
+    private func shareApp()
+    {
+        let title = "Please share this app with your friends."
+        let msg = "\nThe app will always be completely free. Unfortunately Apple will not allow this app on the regular app store because it only serves the Twin Cities area. Word-of-mouth is the only way to grow the user base."
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        let share = UIAlertAction(title: "Share", style: .default) { _ in
+            if let name = URL(string: "https://testflight.apple.com/join/SkYTQvAc") {
+                let objectsToShare = [name]
+                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                self.present(activityVC, animated: true, completion: nil)
+            }
+        }
+        alert.addAction(share)
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(cancel)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
     /////////////////////////////////////////////////////////////////////
     /// MARK: CloudKit Subscription Management
     /////////////////////////////////////////////////////////////////////

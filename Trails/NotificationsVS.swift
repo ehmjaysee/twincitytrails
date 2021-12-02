@@ -82,7 +82,7 @@ class NotificationsVS: UITableViewController
         super.setEditing(true, animated: true)
         
         for (i,item) in filteredTrails.enumerated() {
-            if item.isSubscribed {
+            if item.subscriptionRequested {
                 let path = IndexPath(row: i, section: 0)
                 tableView.selectRow(at: path, animated: false, scrollPosition: .none)
             }

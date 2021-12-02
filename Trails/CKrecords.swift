@@ -82,28 +82,6 @@ class CKmanager
         try? reachability?.startNotifier()
     }
 
-    @objc private func ckAccountChanged() { ckFetchStatus() }
-
-    private func ckFetchStatus()
-    {
-        ckContainer.accountStatus { status, error in
-            if let error = error {
-                print("CK accountStatus " + error.localizedDescription)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-                    self.ckFetchStatus()
-                }
-            } else {
-                // We received valid status. Cache it and send notification.
-                self.ckStatus = status
-            }
-        }
-    }
-
-    
-    /////////////////////////////////////////////////////////////////////
-    /// MARK: CloudKit Subscription Management
-    /////////////////////////////////////////////////////////////////////
-
     func updateSubscriptions()
     {
         for item in allTrails {
@@ -116,6 +94,87 @@ class CKmanager
         }
     }
     
+    //-------------------------------------------------------------------------------
+    // MARK: Private Functions
+    //-------------------------------------------------------------------------------
+
+    @objc private func ckAccountChanged() { ckFetchStatus() }
+
+    private func ckFetchStatus()
+    {
+        ckContainer.accountStatus { status, error in
+            if let error = error {
+                print("CK accountStatus " + error.localizedDescription)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                    self.ckFetchStatus()
+                }
+            } else {
+                // We received valid status.
+                if (status == .available) && (self.ckStatus != .available) {
+                    // Status is good. Check our subscription status.
+                    self.initSubscriptions()
+                }
+                self.ckStatus = status
+            }
+        }
+    }
+
+    //-------------------------------------------------------------------------------
+    // MARK: CloudKit Subscription Management
+    //-------------------------------------------------------------------------------
+
+    private func initSubscriptions()
+    {
+        // In version 2 we changed the way we store subscription flags
+        if ckSubVersion < 2 {
+            for item in allTrails {
+                item.subscriptionRequested = item.isSubscribed
+            }
+        }
+        
+        // When the version number changes we must delete and re-create all subscriptions in our cloudkit database
+        if ckSubVersion != currentSubscriptionVersion {
+            // Delete all cached subscription IDs
+            for item in allTrails {
+                item.subscriptionId = nil
+            }
+            deleteAllSubscriptions() {
+                // Re-Create subscriptions desired by the user
+                self.updateSubscriptions()
+                // Restore is complete
+                ckSubVersion = self.currentSubscriptionVersion
+            }
+        }
+    }
+
+    private func deleteAllSubscriptions( completion: @escaping () -> Void )
+    {
+        // Fetch all subscriptions for this user, then delete each one
+        container.publicCloudDatabase.fetchAllSubscriptions() { subscriptions, error in
+            if let error = error {
+                print(#function + " " + error.localizedDescription)
+            } else if let subscriptions = subscriptions {
+                var count = 0
+                for subscription in subscriptions {
+                    self.container.publicCloudDatabase.delete(withSubscriptionID: subscription.subscriptionID) {
+                        message, error in
+                        if let error = error {
+                            print("SUB DELETE ERROR " + error.localizedDescription)
+                        } else {
+                            count += 1
+                            if count == subscriptions.count {
+                                // All subscriptions are now deleted
+                                completion()
+                            }
+                        }
+                    }
+                }
+            } else {
+                completion()
+            }
+        }
+    }
+
     private func createSubscription( trail: TrailData )
     {
         let predicate = NSPredicate(format: "recordID = %@", CKRecord.ID(recordName: trail.id))
@@ -146,6 +205,7 @@ class CKmanager
             if let error = error {
                 print("SUB DELETE ERROR " + error.localizedDescription)
             } else {
+                // Delete was successful. The subscriptionId is no longer valid.
                 trail.subscriptionId = nil
             }
             if let msg = message {

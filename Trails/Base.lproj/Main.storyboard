@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -146,10 +146,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="11c-6C-f8f">
-                                <rect key="frame" x="0.0" y="802" width="414" height="60"/>
+                                <rect key="frame" x="0.0" y="751" width="414" height="111"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="4" translatesAutoresizingMaskIntoConstraints="NO" id="wsT-9Y-mCH">
-                                        <rect key="frame" x="49" y="14.5" width="316" height="32"/>
+                                        <rect key="frame" x="49" y="12" width="316" height="32"/>
                                         <segments>
                                             <segment title="10 mi"/>
                                             <segment title="20 mi"/>
@@ -161,20 +161,39 @@
                                             <action selector="A_distance:" destination="k3c-td-Yhz" eventType="valueChanged" id="9RF-wJ-jeo"/>
                                         </connections>
                                     </segmentedControl>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nHs-Pi-drf" customClass="TORoundedButton">
+                                        <rect key="frame" x="87" y="55" width="240" height="44"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="240" id="3DN-bC-bDV"/>
+                                            <constraint firstAttribute="height" constant="44" id="zM4-bp-Edz"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="text" value="🎁 Share This App 🎁"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="textPointSize">
+                                                <real key="value" value="19"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="Hqf-fD-L8j"/>
+                                    <constraint firstItem="nHs-Pi-drf" firstAttribute="centerX" secondItem="11c-6C-f8f" secondAttribute="centerX" id="eEy-rn-Kh5"/>
+                                    <constraint firstItem="wsT-9Y-mCH" firstAttribute="top" secondItem="11c-6C-f8f" secondAttribute="top" constant="12" id="jYV-pG-mEg"/>
                                     <constraint firstItem="wsT-9Y-mCH" firstAttribute="centerX" secondItem="11c-6C-f8f" secondAttribute="centerX" id="kgZ-Jz-72C"/>
-                                    <constraint firstItem="wsT-9Y-mCH" firstAttribute="centerY" secondItem="11c-6C-f8f" secondAttribute="centerY" id="lfr-pu-IpI"/>
+                                    <constraint firstAttribute="bottom" secondItem="nHs-Pi-drf" secondAttribute="bottom" constant="12" id="vgF-gL-uhc"/>
+                                    <constraint firstItem="nHs-Pi-drf" firstAttribute="top" secondItem="wsT-9Y-mCH" secondAttribute="bottom" constant="12" id="vht-ns-Pxu"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aGp-HO-3W4">
-                                <rect key="frame" x="0.0" y="100" width="414" height="702"/>
+                                <rect key="frame" x="0.0" y="100" width="414" height="651"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TrailCell" rowHeight="60" id="wV9-CY-byP" customClass="TrailCell" customModule="Trails" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="60"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wV9-CY-byP" id="t3X-5L-w5l">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -264,12 +283,12 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="O_bottomHeight" destination="Hqf-fD-L8j" id="Gye-G1-EtD"/>
                         <outlet property="O_bottomView" destination="11c-6C-f8f" id="7Mu-8m-wlj"/>
                         <outlet property="O_distance" destination="wsT-9Y-mCH" id="OPg-Xa-rIa"/>
                         <outlet property="O_favorite" destination="vKS-Af-Srl" id="eq4-5K-6X7"/>
                         <outlet property="O_filter" destination="ofd-Wz-SIN" id="afs-fx-Q4A"/>
                         <outlet property="O_map" destination="Cru-tk-at9" id="D1h-oZ-4q2"/>
+                        <outlet property="O_share" destination="nHs-Pi-drf" id="0jk-B7-FpZ"/>
                         <outlet property="O_table" destination="aGp-HO-3W4" id="VOw-1Z-k1G"/>
                     </connections>
                 </viewController>
@@ -355,7 +374,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1o7-hs-8Me">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1334"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1L-XP-Zhz">
                                                 <rect key="frame" x="20" y="12" width="374" height="25.5"/>
@@ -364,7 +383,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34k-Gi-UuW" customClass="MKMapView">
-                                                <rect key="frame" x="0.0" y="474" width="414" height="340"/>
+                                                <rect key="frame" x="0.0" y="472" width="414" height="340"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="340" id="vEa-gy-813"/>
@@ -380,7 +399,7 @@
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HdE-Au-1kr" customClass="TORoundedButton">
-                                                <rect key="frame" x="87" y="406" width="240" height="60"/>
+                                                <rect key="frame" x="87" y="404" width="240" height="60"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="240" id="scS-ip-Eg8"/>
@@ -391,7 +410,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KeZ-RL-Xyx">
-                                                <rect key="frame" x="0.0" y="892" width="414" height="414"/>
+                                                <rect key="frame" x="0.0" y="890" width="414" height="414"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="KeZ-RL-Xyx" secondAttribute="height" multiplier="1:1" id="fQA-eO-yBJ"/>
                                                 </constraints>
@@ -405,7 +424,7 @@
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tUI-QU-I5f" customClass="TORoundedButton">
-                                                <rect key="frame" x="87" y="844" width="240" height="40"/>
+                                                <rect key="frame" x="87" y="842" width="240" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="8ug-Q7-jOW"/>
@@ -416,7 +435,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Hc4-rr-o7Y">
-                                                <rect key="frame" x="146.5" y="348" width="121.5" height="28"/>
+                                                <rect key="frame" x="129.5" y="348" width="155.5" height="26"/>
                                             </pageControl>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IMh-Be-1Sh">
                                                 <rect key="frame" x="364" y="20" width="30" height="30"/>

@@ -47,14 +47,8 @@ class MORCdataProvider
     {
         for (i,trail) in response.arrayValue.enumerated() {
             
-            guard let name = trail["trailName"].string, let id = trail["trailId"].string, let status = trail["trailStatus"].string, let date = trail["updatedAt"].int64 else { continue }
+            guard let id = trail["trailId"].string, let status = trail["trailStatus"].string, let date = trail["updatedAt"].int64 else { continue }
 
-            print(name + " " + status)
-            
-            let list = allTrails.filter { $0.id == id }
-            print(name + " \(list.count)")
-            
-            
             // Check if we already have an entry for this trail. This is the normal case.
             if let index = allTrails.firstIndex(where: { $0.id == id }) {
                 let seconds = (date / 1000)
