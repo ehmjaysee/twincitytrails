@@ -19,4 +19,7 @@ June 1
 - Add favorites to all view controllers
 - Map pins are colored to indicate open/close status
 
-Nov 
+Jan 25
+- Updated trail detail page to show the current status in red/green and display the trail boss' notes.
+- Analytics are enabled
+

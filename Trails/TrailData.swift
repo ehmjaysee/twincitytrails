@@ -56,7 +56,7 @@ class TrailData
             return false
         }
     }
-    var howOld: String {
+    var howOld: String? {
         if let lastUpdate = lastUpdate {
             let diff = Calendar.current.dateComponents([.day, .hour], from: lastUpdate, to: Date())
             if let days = diff.day, days > 1 {
@@ -69,7 +69,7 @@ class TrailData
                 return shortDate.string(from: lastUpdate)
             }
         } else {
-            return " "
+            return nil
         }
     }
     

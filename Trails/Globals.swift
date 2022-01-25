@@ -44,4 +44,5 @@ var showDistanceMiles: Double {
     default: return 9999 * MetersPerMile
     }
 }
+let useAnalytics = true
 

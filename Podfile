@@ -7,6 +7,7 @@ target 'Trails' do
 
   # Pods for Trails 411
   pod 'Alamofire'
+  pod 'Mixpanel-swift'
   pod 'ReachabilitySwift'
   pod 'SwiftyJSON'
   pod 'TORoundedButton', :path => '~/xcode/devpods/TORoundedButton'

@@ -11,6 +11,9 @@ import UserNotifications
 import CloudKit
 
 
+let MixPanelToken = "e624fce4e5ebc86531bc06e2e9c4d44f"
+
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate
 {

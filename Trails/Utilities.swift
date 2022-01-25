@@ -325,11 +325,17 @@ func formatToHhMmSsPlus( time: TimeInterval ) -> String
     return timeString
 }
 
-// Determine the runtime environment 
-enum AppConfiguration {
-    case Debug
-    case TestFlight
-    case AppStore
+// Determine the runtime environment
+enum AppConfiguration
+{
+    case Debug, TestFlight, AppStore
+    var name: String {
+        switch self {
+        case .Debug:        return "Debug"
+        case .TestFlight:   return "TestFlight"
+        case .AppStore:     return "AppStore"
+        }
+    }
 }
 
 struct Config {

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		251DC7A0260B3CA600244D1F /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251DC79F260B3CA600244D1F /* MapVC.swift */; };
 		251DC7A4260B46BE00244D1F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251DC7A3260B46BE00244D1F /* Extensions.swift */; };
+		2524EB6827A082BA007CE5AC /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D03AD927A0811200A11853 /* Analytics.swift */; };
 		2535007625DA9F64000EB2B2 /* CKrecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2535007525DA9F64000EB2B2 /* CKrecords.swift */; };
 		2535007E25DAA5DD000EB2B2 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2535007D25DAA5DD000EB2B2 /* Utilities.swift */; };
 		2535008225DAA914000EB2B2 /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2535008125DAA914000EB2B2 /* Globals.swift */; };
@@ -60,6 +61,7 @@
 		25B9E5C5259E8DFF0040F805 /* TrailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailCell.swift; sourceTree = "<group>"; };
 		25B9E5F0259E96670040F805 /* TrailData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailData.swift; sourceTree = "<group>"; };
 		25B9E5FE25A172CF0040F805 /* MORCdata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MORCdata.swift; sourceTree = "<group>"; };
+		25D03AD927A0811200A11853 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		5AEC592A26647F2D00F792EA /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		F82B48542A6356473F397983 /* Pods-Trails.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trails.release.xcconfig"; path = "Target Support Files/Pods-Trails/Pods-Trails.release.xcconfig"; sourceTree = "<group>"; };
 		FF3D348F9FED11540157B77A /* Pods_Trails.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trails.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +112,7 @@
 		25B9E5A1259E73C20040F805 /* Trails */ = {
 			isa = PBXGroup;
 			children = (
+				25D03AD927A0811200A11853 /* Analytics.swift */,
 				25B9E5A2259E73C20040F805 /* AppDelegate.swift */,
 				25B9E5AE259E73C30040F805 /* Assets.xcassets */,
 				2535007525DA9F64000EB2B2 /* CKrecords.swift */,
@@ -277,6 +280,7 @@
 				2535007625DA9F64000EB2B2 /* CKrecords.swift in Sources */,
 				2535008225DAA914000EB2B2 /* Globals.swift in Sources */,
 				25B9E5FF25A172CF0040F805 /* MORCdata.swift in Sources */,
+				2524EB6827A082BA007CE5AC /* Analytics.swift in Sources */,
 				25B9E5BF259E88290040F805 /* RootVC.swift in Sources */,
 				25B9E5BB259E88110040F805 /* TrailsVC.swift in Sources */,
 				2535007E25DAA5DD000EB2B2 /* Utilities.swift in Sources */,
@@ -435,7 +439,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Trails/Trails.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 6ZKDZES4M7;
 				INFOPLIST_FILE = "$(SRCROOT)/Trails/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -457,7 +461,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Trails/Trails.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 6ZKDZES4M7;
 				INFOPLIST_FILE = "$(SRCROOT)/Trails/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

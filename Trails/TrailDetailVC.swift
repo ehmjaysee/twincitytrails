@@ -13,15 +13,15 @@ import SafariServices
 
 class TrailDetailVC: UIViewController
 {
+    @IBOutlet weak var O_lastUpdate: UILabel!
     @IBOutlet weak var O_status: UILabel!
+    @IBOutlet weak var O_description: UILabel!
     @IBOutlet weak var O_image: UIImageView!
     @IBOutlet weak var O_map: MKMapView!
     @IBOutlet weak var O_directions: RoundedButton!
     @IBOutlet weak var O_trailMap: UIImageView!
-    @IBOutlet weak var O_updated: UIButton!
     @IBOutlet weak var O_trailMaps: RoundedButton!
-    @IBOutlet weak var O_imagePageControl: UIPageControl!
-    @IBOutlet weak var O_favorite: UIButton!
+    @IBOutlet weak var O_favorite: UIBarButtonItem!
     
     
     
@@ -35,8 +35,30 @@ class TrailDetailVC: UIViewController
 
         navigationItem.title = trail.name
 
-        O_status.text = trail.status
-        O_updated.setTitle("Updated " + trail.howOld, for: .normal)
+        if let howOld = trail.howOld {
+            O_lastUpdate.text = "Last Update " + howOld
+            if let status = trail.status {
+                O_status.text = status
+                if trail.isOpen {
+                    O_status.textColor = .systemGreen
+                } else {
+                    O_status.textColor = .systemRed
+                }
+            } else {
+                O_status.text = "Trail status is unknown"
+                O_status.textColor = .white
+            }
+            if let description = trail.description {
+                O_description.text = description
+            } else {
+                O_description.text = "There are no details for this trail."
+                O_description.textAlignment = .center
+            }
+        } else {
+            O_lastUpdate.text = ""
+            O_status.text = "Trail status is unknown"
+            O_lastUpdate.text = (trail.description ?? " ")
+        }
 
         // show default image for the trail
         let picname = "pic-" + (trail.filename ?? "default")
@@ -44,9 +66,6 @@ class TrailDetailVC: UIViewController
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(photoTapped(tapGestureRecognizer:)))
         O_image.addGestureRecognizer(tapGestureRecognizer)
 
-//        O_description.text = trail.description
-//        let size = O_description.sizeThatFits(CGSize(width:O_description.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-//        O_descriptionHeight.constant = size.height
         
         // Update the map
         if let user = locationManager.lastLockedLocation {
@@ -80,13 +99,10 @@ class TrailDetailVC: UIViewController
         }
 
         setFavoriteImage()
+        
+        appAnalytics.eventLog(name: "TrailView", properties: ["name":trail.name])
     }
 
-    @IBAction func A_updated(_ sender: Any) {
-        let message = "\n" + (trail.description ?? "There are no notes for this trail")
-        doAlert(vc: self, title: "Latest Update", message: message, fontSize: 17.0)
-    }
-    
     @IBAction func A_favorite(_ sender: Any) {
         trail.isFavorite = !trail.isFavorite
         setFavoriteImage()
@@ -95,9 +111,9 @@ class TrailDetailVC: UIViewController
     private func setFavoriteImage()
     {
         if trail.isFavorite {
-            O_favorite.setImage(UIImage(systemName: "heart.fill") , for: .normal)
+            O_favorite.image = UIImage(systemName: "heart.fill")
         } else {
-            O_favorite.setImage(UIImage(systemName: "heart") , for: .normal)
+            O_favorite.image = UIImage(systemName: "heart")
         }
     }
     
