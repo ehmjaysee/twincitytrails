@@ -23,3 +23,6 @@ Jan 25
 - Updated trail detail page to show the current status in red/green and display the trail boss' notes.
 - Analytics are enabled
 
+April 12
+- Change the red/green icons on the main page to show which trails were updated recently
+

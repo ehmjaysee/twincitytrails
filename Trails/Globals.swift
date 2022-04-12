@@ -11,7 +11,7 @@ import Foundation
 let testMode = false //debug
 
 let MetersPerMile                   = 1609.34   // convert miles to meters
-
+let SecondsPerDay: TimeInterval     = 60*60*24
 
 struct Defaults {
     static let notificationAuth = "notificationAuth"            // Flag set after user grants permission to use notifications

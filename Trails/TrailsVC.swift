@@ -216,8 +216,15 @@ extension TrailsVC: UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: "TrailCell", for: indexPath)
         if let trailCell = cell as? TrailCell {
             trailCell.O_title.text = trail.name
+            let seconds = trail.timeSinceLastUpdate ?? SecondsPerDay
             if trail.isOpen {
-                trailCell.O_icon.image = #imageLiteral(resourceName: "green-light-small")
+                if seconds < SecondsPerDay {
+                    trailCell.O_icon.image = #imageLiteral(resourceName: "green-light-small-alert")
+                } else {
+                    trailCell.O_icon.image = #imageLiteral(resourceName: "green-light-small")
+                }
+            } else if seconds < SecondsPerDay {
+                trailCell.O_icon.image = #imageLiteral(resourceName: "red-light-small-alert")
             } else {
                 trailCell.O_icon.image = #imageLiteral(resourceName: "red-light-small")
             }

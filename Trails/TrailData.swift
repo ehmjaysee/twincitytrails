@@ -72,6 +72,14 @@ class TrailData
             return nil
         }
     }
+    var timeSinceLastUpdate: TimeInterval? {
+        if let lastUpdate = lastUpdate {
+            let seconds = Date().timeIntervalSince1970 - lastUpdate.timeIntervalSince1970
+            return seconds
+        } else {
+            return nil
+        }
+    }
     
     private var favoriteKey: String {
         let key = id + "favorite"
