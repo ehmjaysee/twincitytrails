@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -162,14 +162,14 @@
                                         </connections>
                                     </segmentedControl>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nHs-Pi-drf" customClass="TORoundedButton">
-                                        <rect key="frame" x="87" y="55" width="240" height="44"/>
+                                        <rect key="frame" x="87" y="59" width="240" height="40"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="3DN-bC-bDV"/>
-                                            <constraint firstAttribute="height" constant="44" id="zM4-bp-Edz"/>
+                                            <constraint firstAttribute="height" constant="40" id="zM4-bp-Edz"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="text" value="🎁 Share This App 🎁"/>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="text" value="Share This App"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
@@ -185,7 +185,7 @@
                                     <constraint firstItem="wsT-9Y-mCH" firstAttribute="top" secondItem="11c-6C-f8f" secondAttribute="top" constant="12" id="jYV-pG-mEg"/>
                                     <constraint firstItem="wsT-9Y-mCH" firstAttribute="centerX" secondItem="11c-6C-f8f" secondAttribute="centerX" id="kgZ-Jz-72C"/>
                                     <constraint firstAttribute="bottom" secondItem="nHs-Pi-drf" secondAttribute="bottom" constant="12" id="vgF-gL-uhc"/>
-                                    <constraint firstItem="nHs-Pi-drf" firstAttribute="top" secondItem="wsT-9Y-mCH" secondAttribute="bottom" constant="12" id="vht-ns-Pxu"/>
+                                    <constraint firstItem="nHs-Pi-drf" firstAttribute="top" secondItem="wsT-9Y-mCH" secondAttribute="bottom" constant="16" id="vht-ns-Pxu"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aGp-HO-3W4">
