@@ -17,21 +17,21 @@ class MapVC: UIViewController
     @IBOutlet weak var O_bottomView: UIView!
     @IBOutlet weak var O_distance: UISegmentedControl!
     @IBOutlet weak var O_favorite: UIBarButtonItem!
-    
+    @IBOutlet weak var O_bottomViewHeight: NSLayoutConstraint!
     
     var filteredTrails = [TrailData]()
+    var viewHeight = 0.0
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
 
+        viewHeight = O_bottomViewHeight.constant
+        
         NotificationCenter.default.addObserver(self, selector: #selector(trailUpdate(notification:)), name: Notif_TrailUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(locationUpdate(notification:)), name: Notif_LocationUpdate, object: nil)
 
         showUserSettings()
-        
-        // Update the map
-        O_map.showsUserLocation = true
         
         // Create annotations for all trails
         refresh()
@@ -84,8 +84,22 @@ class MapVC: UIViewController
             }
         }
 
-        if let user = locationManager.lastLockedLocation, filteredTrails.count > 0 {
-            O_map.fitAll(userLocation: user, animated: true)
+        if locationManager.isLocationUsable {
+            O_map.showsUserLocation = true
+            if filteredTrails.count > 0 {
+                O_map.fitAll(userLocation: locationManager.lastLockedLocation, animated: true)
+            }
+        } else {
+            O_map.showsUserLocation = false
+            if filteredTrails.count > 0 {
+                O_map.fitAll(userLocation: nil, animated: true)
+            }
+        }
+        
+        if locationManager.isLocationUsable {
+            O_bottomViewHeight.constant = viewHeight
+        } else {
+            O_bottomViewHeight.constant = 0.0
         }
     }
     
@@ -117,13 +131,16 @@ class MapVC: UIViewController
             }
         } else {
             // the list of trails was updated
-            DispatchQueue.main.async { self.refresh() }
+            DispatchQueue.main.async {
+                self.O_map.removeAnnotations(self.O_map.annotations)
+                self.refresh()
+            }
         }
     }
     
     @objc private func locationUpdate( notification: NSNotification ) {
-        if let user = locationManager.lastLockedLocation {
-            O_map.fitAll(userLocation: user, animated: true)
+        if locationManager.isLocationUsable {
+            O_map.fitAll(userLocation: locationManager.lastLockedLocation, animated: true)
         }
     }
 

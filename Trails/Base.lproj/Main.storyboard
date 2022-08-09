@@ -127,6 +127,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="O_bottomView" destination="MEL-RJ-IHY" id="Lj5-aH-eTF"/>
+                        <outlet property="O_bottomViewHeight" destination="COJ-gU-79c" id="2Y6-3y-CPc"/>
                         <outlet property="O_distance" destination="iz7-L2-XBZ" id="8Ju-n5-VJC"/>
                         <outlet property="O_favorite" destination="2k0-3R-u6Q" id="Oo6-RD-RgV"/>
                         <outlet property="O_filter" destination="tcO-EY-zmf" id="g6i-2t-RvT"/>

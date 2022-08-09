@@ -35,7 +35,16 @@ class LocationManager: NSObject, CLLocationManagerDelegate
             print("LOCATION UPDATE")
         }
     }
+
+    var isLocationUsable: Bool {
+        // Calculate how far away the user is from Minneapolis 44.977962  -93.266629
+        guard let user = lastLockedLocation, locationState == .locked else { return false }
+        let mpls = CLLocation(latitude: 44.977962, longitude: -93.266629)
+        let distance = user.distance(from: mpls)
+        return (distance < (300 * 1000)) ? true:false
+    }
     
+
     // Singleton
     static let shared = LocationManager()
 
@@ -95,27 +104,25 @@ class LocationManager: NSObject, CLLocationManagerDelegate
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         // Now take just the most recent location value and update our state machine
-        if let newLocation = locations.last
-        {
-            hAccuracy = newLocation.horizontalAccuracy
-            vAccuracy = newLocation.verticalAccuracy
-            let accuracy = (hAccuracy > 0.0) ? hAccuracy : 999.99
+        guard let newLocation = locations.last else { return }
+        
+        hAccuracy = newLocation.horizontalAccuracy
+        vAccuracy = newLocation.verticalAccuracy
+        let accuracy = (hAccuracy > 0.0) ? hAccuracy : 999.99
 
-            if (accuracy < 100.0) {
-                // We have good accuracy
-                // Save this new location if significantly different from previous location
-                if lastLockedLocation == nil {
-                    lastLockedLocation = newLocation
-                } else if let oldLocation = lastLockedLocation, oldLocation.distance(from: newLocation) > 1000 {
-                    lastLockedLocation = newLocation
-                }
-                // Update our state
-                if locationState == .authorized {
-                    locationState = .locked
-                }
-            } else if (accuracy >= 20.0) && (locationState == .locked) {
-                locationState = .authorized
+        if (accuracy < 100.0) {
+            // Save this new location if significantly different from previous location
+            if lastLockedLocation == nil {
+                lastLockedLocation = newLocation
+            } else if let oldLocation = lastLockedLocation, oldLocation.distance(from: newLocation) > 1000 {
+                lastLockedLocation = newLocation
             }
+            // Update our state
+            if locationState == .authorized {
+                locationState = .locked
+            }
+        } else if (accuracy >= 20.0) && (locationState == .locked) {
+            locationState = .authorized
         }
     }
 

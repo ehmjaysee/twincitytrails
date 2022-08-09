@@ -21,6 +21,7 @@ class TrailsVC: UIViewController
     @IBOutlet weak var O_distanceHeight: NSLayoutConstraint!
     
     var filteredTrails = [TrailData]()
+    var viewHeight = 0.0
 
     override func viewDidLoad()
     {
@@ -32,13 +33,8 @@ class TrailsVC: UIViewController
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(updateStatus), for: UIControl.Event.valueChanged)
         O_table.refreshControl = refreshControl
+        viewHeight = O_distanceHeight.constant
 
-        if locationManager.lastLockedLocation == nil {
-            O_distance.isHidden = true
-            O_map.hide()
-            O_distanceHeight.constant = 1.0
-        }
-        
         // Update the directions button
 //debug        O_share.tappedHandler = { self.shareApp() }
         
@@ -135,8 +131,7 @@ class TrailsVC: UIViewController
     }
     
     @objc private func locationUpdate( notification: NSNotification ) {
-        O_distance.isHidden = false
-        O_map.unhide()
+        DispatchQueue.main.async { self.refresh() }
     }
     
     private func showUserSettings()
@@ -155,6 +150,14 @@ class TrailsVC: UIViewController
         let section0: IndexSet = [0]
         self.O_table.reloadSections(section0, with: .automatic)
         self.O_table.refreshControl?.endRefreshing()
+        
+        if locationManager.isLocationUsable {
+            O_distance.isHidden = false
+            O_distanceHeight.constant = viewHeight
+        } else {
+            O_distance.isHidden = true
+            O_distanceHeight.constant = 1.0
+        }
     }
     
     private func getFilteredTrails()

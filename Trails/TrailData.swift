@@ -134,7 +134,6 @@ class TrailData
 //                print("ETA \(response.expectedTravelTime)s \(response.distance)m")
                 self.travelTime = response.expectedTravelTime
                 self.distance = response.distance
-//debug                NotificationCenter.default.post(name: Notif_TrailUpdate, object: self.id)
             }
             decrementETAcounter()
         }

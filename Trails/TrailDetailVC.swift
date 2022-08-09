@@ -79,7 +79,7 @@ class TrailDetailVC: UIViewController
                 O_map.isUserInteractionEnabled = true
             }
         }
-        O_map.showsUserLocation = (locationManager.locationState == .locked)
+        O_map.showsUserLocation = true
 
         // Update the directions button
         O_directions.text = ""
