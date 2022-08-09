@@ -18,7 +18,7 @@ class TrailsVC: UIViewController
     @IBOutlet weak var O_filter: UISegmentedControl!
     @IBOutlet weak var O_distance: UISegmentedControl!
     @IBOutlet weak var O_favorite: UIBarButtonItem!
-    @IBOutlet weak var O_share: RoundedButton!
+    @IBOutlet weak var O_distanceHeight: NSLayoutConstraint!
     
     var filteredTrails = [TrailData]()
 
@@ -34,11 +34,13 @@ class TrailsVC: UIViewController
         O_table.refreshControl = refreshControl
 
         if locationManager.lastLockedLocation == nil {
+            O_distance.isHidden = true
             O_map.hide()
+            O_distanceHeight.constant = 1.0
         }
         
         // Update the directions button
-        O_share.tappedHandler = { self.shareApp() }
+//debug        O_share.tappedHandler = { self.shareApp() }
         
         NotificationCenter.default.addObserver(self, selector: #selector(trailUpdate(notification:)), name: Notif_TrailUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(locationUpdate(notification:)), name: Notif_LocationUpdate, object: nil)
@@ -133,6 +135,7 @@ class TrailsVC: UIViewController
     }
     
     @objc private func locationUpdate( notification: NSNotification ) {
+        O_distance.isHidden = false
         O_map.unhide()
     }
     
@@ -172,7 +175,7 @@ class TrailsVC: UIViewController
         filteredTrails.sort { $0.name < $1.name }
     }
     
-    private func shareApp()
+    private func shareApp()  //debug
     {
         let title = "Please share this app with your friends."
         let msg = "\nThe app will always be completely free. Unfortunately Apple will not allow this app on the regular app store because it only serves the Twin Cities area. Word-of-mouth is the only way to grow the user base."

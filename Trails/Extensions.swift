@@ -27,6 +27,13 @@ extension MKMapView
         }
         setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100), animated: animated)
     }
+    
+    func setCenter( _ center: CLLocationCoordinate2D, padding: CGFloat )
+    {
+        let region = MKCoordinateRegion(center: center, latitudinalMeters: padding, longitudinalMeters: padding)
+        setRegion(region, animated: true)
+    }
+    
 } // extension MKMapView
 
 

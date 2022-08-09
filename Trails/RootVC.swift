@@ -21,7 +21,7 @@ class RootVC: UIViewController
     {
         super.viewDidLoad()
 
-        locationManager.startup()
+//debug        locationManager.startup()
         ckManager.start()        
     }
     

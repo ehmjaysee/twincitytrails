@@ -146,7 +146,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="11c-6C-f8f">
-                                <rect key="frame" x="0.0" y="751" width="414" height="111"/>
+                                <rect key="frame" x="0.0" y="807" width="414" height="55"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" selectedSegmentIndex="4" translatesAutoresizingMaskIntoConstraints="NO" id="wsT-9Y-mCH">
                                         <rect key="frame" x="49" y="12" width="316" height="32"/>
@@ -161,35 +161,16 @@
                                             <action selector="A_distance:" destination="k3c-td-Yhz" eventType="valueChanged" id="9RF-wJ-jeo"/>
                                         </connections>
                                     </segmentedControl>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nHs-Pi-drf" customClass="TORoundedButton">
-                                        <rect key="frame" x="87" y="59" width="240" height="40"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="240" id="3DN-bC-bDV"/>
-                                            <constraint firstAttribute="height" constant="40" id="zM4-bp-Edz"/>
-                                        </constraints>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="string" keyPath="text" value="Share This App"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="textPointSize">
-                                                <real key="value" value="19"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstItem="nHs-Pi-drf" firstAttribute="centerX" secondItem="11c-6C-f8f" secondAttribute="centerX" id="eEy-rn-Kh5"/>
-                                    <constraint firstItem="wsT-9Y-mCH" firstAttribute="top" secondItem="11c-6C-f8f" secondAttribute="top" constant="12" id="jYV-pG-mEg"/>
+                                    <constraint firstAttribute="height" constant="55" id="Oan-8S-la7"/>
                                     <constraint firstItem="wsT-9Y-mCH" firstAttribute="centerX" secondItem="11c-6C-f8f" secondAttribute="centerX" id="kgZ-Jz-72C"/>
-                                    <constraint firstAttribute="bottom" secondItem="nHs-Pi-drf" secondAttribute="bottom" constant="12" id="vgF-gL-uhc"/>
-                                    <constraint firstItem="nHs-Pi-drf" firstAttribute="top" secondItem="wsT-9Y-mCH" secondAttribute="bottom" constant="16" id="vht-ns-Pxu"/>
+                                    <constraint firstItem="wsT-9Y-mCH" firstAttribute="centerY" secondItem="11c-6C-f8f" secondAttribute="centerY" id="xOY-Cg-ATP"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aGp-HO-3W4">
-                                <rect key="frame" x="0.0" y="100" width="414" height="651"/>
+                                <rect key="frame" x="0.0" y="100" width="414" height="707"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TrailCell" rowHeight="60" id="wV9-CY-byP" customClass="TrailCell" customModule="Trails" customModuleProvider="target">
@@ -285,10 +266,10 @@
                     <connections>
                         <outlet property="O_bottomView" destination="11c-6C-f8f" id="7Mu-8m-wlj"/>
                         <outlet property="O_distance" destination="wsT-9Y-mCH" id="OPg-Xa-rIa"/>
+                        <outlet property="O_distanceHeight" destination="Oan-8S-la7" id="kjD-Vb-PJU"/>
                         <outlet property="O_favorite" destination="vKS-Af-Srl" id="eq4-5K-6X7"/>
                         <outlet property="O_filter" destination="ofd-Wz-SIN" id="afs-fx-Q4A"/>
                         <outlet property="O_map" destination="Cru-tk-at9" id="D1h-oZ-4q2"/>
-                        <outlet property="O_share" destination="nHs-Pi-drf" id="0jk-B7-FpZ"/>
                         <outlet property="O_table" destination="aGp-HO-3W4" id="VOw-1Z-k1G"/>
                     </connections>
                 </viewController>
@@ -406,7 +387,7 @@
                                                     <constraint firstAttribute="height" constant="40" id="xaR-gf-XN9"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="text" value="Directions"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="text" value="Get Directions"/>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KeZ-RL-Xyx">

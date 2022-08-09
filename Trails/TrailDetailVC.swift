@@ -68,15 +68,18 @@ class TrailDetailVC: UIViewController
 
         
         // Update the map
-        if let user = locationManager.lastLockedLocation {
-            O_map.showsUserLocation = true
-            if let annotation = PinObject(trail: trail) {
-                O_map.addAnnotation(annotation)
-                O_map.selectAnnotation(annotation, animated: true)
+        if let annotation = PinObject(trail: trail) {
+            O_map.addAnnotation(annotation)
+            O_map.selectAnnotation(annotation, animated: true)
+            if locationManager.locationState == .locked {
+                O_map.fitAll(userLocation: locationManager.lastLockedLocation, animated: false)
+                O_map.isUserInteractionEnabled = false
+            } else {
+                O_map.setCenter(annotation.coordinate, padding: 2000)
+                O_map.isUserInteractionEnabled = true
             }
-            O_map.fitAll(userLocation: user, animated: false)
-            O_map.isUserInteractionEnabled = false
         }
+        O_map.showsUserLocation = (locationManager.locationState == .locked)
 
         // Update the directions button
         O_directions.text = ""
