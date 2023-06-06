@@ -25,7 +25,7 @@ class AppAnalytics
     private init()
     {
         // Initialize the Mixpanel object. Use the flag [useAnalytics] to set the opt-out/opt-in status.
-        mixpanel = Mixpanel.initialize(token: MixPanelToken, optOutTrackingByDefault: !useAnalytics)
+        mixpanel = Mixpanel.initialize(token: MixPanelToken, trackAutomaticEvents: true, optOutTrackingByDefault: !useAnalytics)
 
         // Store the app distro (debug, testflight, appstore) with every event
         mixpanel?.registerSuperProperties(["AppDistro": Config.appConfiguration.name])

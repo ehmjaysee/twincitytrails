@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0686100A8209EB96FFF625EC /* Pods_Trails.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FCF1F35DC7844236969246D /* Pods_Trails.framework */; };
 		251DC7A0260B3CA600244D1F /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251DC79F260B3CA600244D1F /* MapVC.swift */; };
 		251DC7A4260B46BE00244D1F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 251DC7A3260B46BE00244D1F /* Extensions.swift */; };
 		2524EB6827A082BA007CE5AC /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D03AD927A0811200A11853 /* Analytics.swift */; };
@@ -30,11 +31,9 @@
 		25B9E5F1259E96670040F805 /* TrailData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B9E5F0259E96670040F805 /* TrailData.swift */; };
 		25B9E5FF25A172CF0040F805 /* MORCdata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25B9E5FE25A172CF0040F805 /* MORCdata.swift */; };
 		5AEC592B26647F2D00F792EA /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEC592A26647F2D00F792EA /* CoreDataManager.swift */; };
-		DF0D5A9445ED2A6E40A76314 /* Pods_Trails.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF3D348F9FED11540157B77A /* Pods_Trails.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		15EE897E2FD654810FBFA917 /* Pods-Trails.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trails.debug.xcconfig"; path = "Target Support Files/Pods-Trails/Pods-Trails.debug.xcconfig"; sourceTree = "<group>"; };
 		251DC79F260B3CA600244D1F /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		251DC7A3260B46BE00244D1F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		2535007525DA9F64000EB2B2 /* CKrecords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CKrecords.swift; sourceTree = "<group>"; };
@@ -62,9 +61,10 @@
 		25B9E5F0259E96670040F805 /* TrailData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailData.swift; sourceTree = "<group>"; };
 		25B9E5FE25A172CF0040F805 /* MORCdata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MORCdata.swift; sourceTree = "<group>"; };
 		25D03AD927A0811200A11853 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		4FCF1F35DC7844236969246D /* Pods_Trails.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trails.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AEC592A26647F2D00F792EA /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		F82B48542A6356473F397983 /* Pods-Trails.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trails.release.xcconfig"; path = "Target Support Files/Pods-Trails/Pods-Trails.release.xcconfig"; sourceTree = "<group>"; };
-		FF3D348F9FED11540157B77A /* Pods_Trails.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Trails.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		64EB6AB7ACFDCA696A31F659 /* Pods-Trails.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trails.debug.xcconfig"; path = "Target Support Files/Pods-Trails/Pods-Trails.debug.xcconfig"; sourceTree = "<group>"; };
+		A2A2A186F3886E20EBAE0431 /* Pods-Trails.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Trails.release.xcconfig"; path = "Target Support Files/Pods-Trails/Pods-Trails.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25ADC07B25BA288B00534968 /* CloudKit.framework in Frameworks */,
-				DF0D5A9445ED2A6E40A76314 /* Pods_Trails.framework in Frameworks */,
+				0686100A8209EB96FFF625EC /* Pods_Trails.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,7 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				25ADC07A25BA288B00534968 /* CloudKit.framework */,
-				FF3D348F9FED11540157B77A /* Pods_Trails.framework */,
+				4FCF1F35DC7844236969246D /* Pods_Trails.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -151,8 +151,8 @@
 		F63771C7BD292A7C2A061E9D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				15EE897E2FD654810FBFA917 /* Pods-Trails.debug.xcconfig */,
-				F82B48542A6356473F397983 /* Pods-Trails.release.xcconfig */,
+				64EB6AB7ACFDCA696A31F659 /* Pods-Trails.debug.xcconfig */,
+				A2A2A186F3886E20EBAE0431 /* Pods-Trails.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -164,11 +164,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25B9E5B6259E73C30040F805 /* Build configuration list for PBXNativeTarget "Trails" */;
 			buildPhases = (
-				F3EDEA71484630BA9EE0CA4B /* [CP] Check Pods Manifest.lock */,
+				6461DA87F1F2322D941235D7 /* [CP] Check Pods Manifest.lock */,
 				25B9E59B259E73C20040F805 /* Sources */,
 				25B9E59C259E73C20040F805 /* Frameworks */,
 				25B9E59D259E73C20040F805 /* Resources */,
-				4C083E9F3EE45D5EEB85AD4A /* [CP] Embed Pods Frameworks */,
+				0D0325A553F70A3FD0BF2813 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -226,7 +226,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4C083E9F3EE45D5EEB85AD4A /* [CP] Embed Pods Frameworks */ = {
+		0D0325A553F70A3FD0BF2813 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -243,7 +243,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Trails/Pods-Trails-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F3EDEA71484630BA9EE0CA4B /* [CP] Check Pods Manifest.lock */ = {
+		6461DA87F1F2322D941235D7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -433,7 +433,7 @@
 		};
 		25B9E5B7259E73C30040F805 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15EE897E2FD654810FBFA917 /* Pods-Trails.debug.xcconfig */;
+			baseConfigurationReference = 64EB6AB7ACFDCA696A31F659 /* Pods-Trails.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -442,6 +442,7 @@
 				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = 6ZKDZES4M7;
 				INFOPLIST_FILE = "$(SRCROOT)/Trails/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -455,7 +456,7 @@
 		};
 		25B9E5B8259E73C30040F805 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F82B48542A6356473F397983 /* Pods-Trails.release.xcconfig */;
+			baseConfigurationReference = A2A2A186F3886E20EBAE0431 /* Pods-Trails.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -464,6 +465,7 @@
 				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_TEAM = 6ZKDZES4M7;
 				INFOPLIST_FILE = "$(SRCROOT)/Trails/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

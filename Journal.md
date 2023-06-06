@@ -26,3 +26,6 @@ Jan 25
 April 12
 - Change the red/green icons on the main page to show which trails were updated recently
 
+June 5
+- The MORC database stopped updating sometime in late April 2023
+
